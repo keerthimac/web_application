@@ -10,7 +10,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model sub_company {
-  sub_company_id   Int    @id @default(autoincrement())
-  sub_company_name String @unique
+model SubCompany {
+  subCompanyId   Int           @id @default(autoincrement())
+  subCompanyName String
+  subContracts   SubContract[]
+}
+
+model Project {
+  projectId    Int                @id @default(autoincrement())
+  projectName  String
+  clientName   String
+  subContracts SubContract[]
+  projectStage StagesOnProjects[]
+}
+
+model ProjectStage {
+  projectStageId Int                @id @default(autoincrement())
+  projectStage   String
+  subContracts   SubContract[]
+  projects       StagesOnProjects[]
+}
+
+// one to meny relationship on subcontract & sub company
+// one to meny relationship on subcontract & projects
+// one to meny relationship on subcontract & stages
+model SubContract {
+  subContractId Int @id @default(autoincrement())
+
+  subCompany     SubCompany   @relation(fields: [subCompanyId], references: [subCompanyId])
+  subCompanyId   Int
+  Project        Project      @relation(fields: [projectId], references: [projectId])
+  projectId      Int
+  ProjectStage   ProjectStage @relation(fields: [projectStageId], references: [projectStageId])
+  projectStageId Int
+}
+
+//Meny to Meny with Projects & Stages with value
+model StagesOnProjects {
+  Project        Project      @relation(fields: [projectId], references: [projectId])
+  projectId      Int
+  ProjectStage   ProjectStage @relation(fields: [projectStageId], references: [projectStageId])
+  projectStageId Int
+  value          Decimal      @db.Decimal(10, 2)
+
+  @@id([projectId, projectStageId])
 }
