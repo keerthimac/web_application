@@ -37,12 +37,23 @@ model ProjectStage {
 model SubContract {
   subContractId Int @id @default(autoincrement())
 
-  subCompany     SubCompany   @relation(fields: [subCompanyId], references: [subCompanyId])
-  subCompanyId   Int
-  Project        Project      @relation(fields: [projectId], references: [projectId])
-  projectId      Int
-  ProjectStage   ProjectStage @relation(fields: [projectStageId], references: [projectStageId])
-  projectStageId Int
+  subCompany      SubCompany            @relation(fields: [subCompanyId], references: [subCompanyId])
+  subCompanyId    Int
+  Project         Project               @relation(fields: [projectId], references: [projectId])
+  projectId       Int
+  ProjectStage    ProjectStage          @relation(fields: [projectStageId], references: [projectStageId])
+  projectStageId  Int
+  subContractName String
+  startDate       DateTime?
+  finishDate      DateTime?
+  subPayments     SubContractPayments[]
+}
+
+model SubContractPayments {
+  subPaymentId Int @id @default(autoincrement())
+
+  SubContract   SubContract @relation(fields: [subContractId], references: [subContractId])
+  subContractId Int
 }
 
 //Meny to Meny with Projects & Stages with value

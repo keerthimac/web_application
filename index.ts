@@ -1,15 +1,7 @@
 import { PrismaClient } from "@prisma/client";
-
 const prisma = new PrismaClient();
 
-async function main() {
-  const subName = await prisma.sub_company.create({
-    data: {
-      sub_company_name: "nawarathna construction",
-    },
-  });
-  console.log(subName);
-}
+async function main() {}
 
 main()
   .then(async () => {
