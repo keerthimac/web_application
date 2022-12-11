@@ -1,0 +1,20 @@
+sub contract requirements
+
+CREATE
+
+-ability to create sub contract company
+  --sub contract company
+  -name
+  -address
+  -sub contracts info (project,stage)
+  -active status of contracts
+  -link to rates for sub contracts
+
+READ
+
+-ability to get following info
+    -- Sub Contract Payments
+    -total sub contract amount for given period
+    -sub contract start date
+    -full record of payments with dates
+
