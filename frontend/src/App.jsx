@@ -1,7 +1,11 @@
+import FormInput from "./components/FormInput";
+import ProjectAddInfo from "./pages/project/ProjectAddInfo";
+
 function App() {
   return (
     <div>
-      <h1>App Page</h1>
+      <ProjectAddInfo />
+      {/* <FormInput /> */}
     </div>
   );
 }
