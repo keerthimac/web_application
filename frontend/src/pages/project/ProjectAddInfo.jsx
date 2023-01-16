@@ -1,115 +1,79 @@
 import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
+import FormInput from "../../components/FormInput";
+import LocationComponent from "../../components/LocationComponent";
 
 function ProjectAddInfo() {
-  const [projectInfo, setProjectInfo] = useState([]);
-  const [provinces, setProvinces] = useState([
-    { id: 1, province: "Pro One" },
-    { id: 2, province: "Pro Two" },
-    { id: 3, province: "Pro Three" },
-  ]);
-  const [districts, setDistricts] = useState([
-    { id: 1, district: "Dis One" },
-    { id: 2, district: "Dis Two" },
-    { id: 3, district: "Dis Three" },
-  ]);
-  const [cities, setCities] = useState([
-    { id: 1, city: "City One" },
-    { id: 2, city: "City Two" },
-    { id: 3, city: "City Three" },
-  ]);
+  const [projectInfo, setProjectInfo] = useState({
+    clientName: "",
+    addressLine01: "",
+    addressLine02: "",
+    addressLine03: "",
+    province: "0",
+    district: "0",
+    city: "0",
+  });
 
-  const { clientName, province, district, city } = projectInfo;
+  const clientForm = [
+    {
+      id: 1,
+      name: "clientName",
+      type: "text",
+      placeholder: "Client Name",
+      label: "Client Name",
+      required: true,
+    },
+    {
+      id: 2,
+      name: "addressLine01",
+      type: "text",
+      placeholder: "Address Line 01",
+      label: "Address Line 01",
+      required: true,
+    },
+    {
+      id: 3,
+      name: "addressLine02",
+      type: "text",
+      placeholder: "Address Line 02",
+      label: "Address Line 02",
+      required: true,
+    },
+    {
+      id: 4,
+      name: "addressLine03",
+      type: "text",
+      placeholder: "Address Line 03",
+      label: "Address Line 03",
+      required: true,
+    },
+  ];
 
-  const handleChange = (e) => {
-    let { name, value } = e.target;
-    setProjectInfo((prev) => ({ ...prev, [name]: value }));
+  const onChange = (e) => {
+    setProjectInfo({
+      ...projectInfo,
+      [e.target.name]: e.target.value,
+    });
   };
+
   return (
     <Container>
       <Form>
         <Form.Group className='mb-3 mt-3'>
-          <Form.Label>Client Name</Form.Label>
-          <Form.Control
-            required
-            onChange={handleChange}
-            name='clientName'
-            type='text'
-            placeholder='Client Name'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3 mt-3'>
-          <Form.Label>Address Line 01</Form.Label>
-          <Form.Control
-            required
-            onChange={handleChange}
-            name='clientName'
-            type='text'
-            placeholder='Client Name'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3 mt-3'>
-          <Form.Label>Address Line 02</Form.Label>
-          <Form.Control
-            required
-            onChange={handleChange}
-            name='clientName'
-            type='text'
-            placeholder='Client Name'
-          />
-        </Form.Group>
-        <Form.Group className='mb-3 mt-3'>
-          <Form.Label>Address Line 03</Form.Label>
-          <Form.Control
-            required
-            onChange={handleChange}
-            name='clientName'
-            type='text'
-            placeholder='Client Name'
-          />
-        </Form.Group>
-        <Form.Label>Province</Form.Label>
-        <Form.Select
-          required
-          aria-label='Default select example'
-          className='mb-3'
-          name='province'
-          value={province}
-          onChange={handleChange}>
-          {provinces.map((info) => (
-            <option key={info.id} value={info.id}>
-              {info.province}
-            </option>
+          {clientForm.map((data) => (
+            <FormInput
+              key={data.id}
+              {...data}
+              value={projectInfo[data.name]}
+              onChange={onChange}
+            />
           ))}
-        </Form.Select>
-        <Form.Label>District</Form.Label>
-        <Form.Select
-          required
-          aria-label='Default select example'
-          className='mb-3'
-          name='district'
-          value={district}
-          onChange={handleChange}>
-          {districts.map((info) => (
-            <option key={info.id} value={info.id}>
-              {info.district}
-            </option>
-          ))}
-        </Form.Select>
-        <Form.Label>City</Form.Label>
-        <Form.Select
-          required
-          aria-label='Default select example'
-          className='mb-3'
-          name='city'
-          value={city}
-          onChange={handleChange}>
-          {cities.map((info) => (
-            <option key={info.id} value={info.id}>
-              {info.city}
-            </option>
-          ))}
-        </Form.Select>
+        </Form.Group>
+        <LocationComponent
+          onChange={onChange}
+          state={projectInfo}
+          setState={setProjectInfo}
+        />
       </Form>
     </Container>
   );
