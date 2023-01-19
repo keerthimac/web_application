@@ -1,6 +1,6 @@
 import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
-import FormInput from "../../components/FormInput";
+import FormInput from "../../components/Inputs/FormInput";
 import LocationComponent from "../../components/LocationComponent";
 
 function ProjectAddInfo() {

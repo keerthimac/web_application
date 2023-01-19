@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import SelectForm from "./SelectForm";
+import SelectForm from "./Inputs/SelectForm";
 
 function LocationComponent(props) {
   const [provinces, setProvinces] = useState([{ id: 0, label: "No Options" }]);
