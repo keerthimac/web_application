@@ -66,3 +66,104 @@ model StagesOnProjects {
 
   @@id([projectId, projectStageId])
 }
+
+//Plumbing Models
+
+model PlumFitting {
+  id              Int               @id @default(autoincrement())
+  plumFitting     String
+  PlumFittingInfo PlumFittingInfo[]
+}
+
+model PlumBrand {
+  id              Int               @id @default(autoincrement())
+  plumBrand       String
+  PlumFittingInfo PlumFittingInfo[]
+  PlumPipeInfo    PlumPipeInfo[]
+}
+
+model PlumGrade {
+  id              Int               @id @default(autoincrement())
+  plumGrade       String
+  plumStandard    String
+  PlumFittingInfo PlumFittingInfo[]
+  PlumPipeInfo    PlumPipeInfo[]
+}
+
+model PlumSize {
+  id               Int               @id @default(autoincrement())
+  plumSizeMetric   String
+  plumSizeImperial String
+  PlumFittingInfo  PlumFittingInfo[]
+  PlumPipeInfo     PlumPipeInfo[]
+}
+
+model PlumType {
+  id              Int               @id @default(autoincrement())
+  plumType        String
+  PlumFittingInfo PlumFittingInfo[]
+  PlumPipeInfo    PlumPipeInfo[]
+}
+
+model PlumPipeEndType {
+  id              Int            @id @default(autoincrement())
+  plumPipeEndType String
+  PlumPipeInfo    PlumPipeInfo[]
+}
+
+model PlumFittingInfo {
+  id               Int                @id @default(autoincrement())
+  PlumFitting      PlumFitting        @relation(fields: [plumFittingId], references: [id])
+  plumFittingId    Int
+  PlumBrand        PlumBrand          @relation(fields: [plumBrandId], references: [id])
+  plumBrandId      Int
+  PlumGrade        PlumGrade          @relation(fields: [plumGradeId], references: [id])
+  plumGradeId      Int
+  PlumSize         PlumSize           @relation(fields: [plumSizeId], references: [id])
+  plumSizeId       Int
+  PlumFittingPrice PlumFittingPrice[]
+  PlumType         PlumType           @relation(fields: [plumTypeId], references: [id])
+  plumTypeId       Int
+}
+
+model PlumPipeInfo {
+  id                     Int             @id @default(autoincrement())
+  PlumBrand              PlumBrand       @relation(fields: [plumBrandId], references: [id])
+  plumBrandId            Int
+  PlumGrade              PlumGrade       @relation(fields: [plumGradeId], references: [id])
+  plumGradeId            Int
+  PlumSize               PlumSize        @relation(fields: [plumSizeId], references: [id])
+  plumSizeId             Int
+  PlumPipeEndType        PlumPipeEndType @relation(fields: [plumPipeEndTypeId], references: [id])
+  plumPipeEndTypeId      Int
+  PlumPipePrice          PlumPipePrice[]
+  PlumType               PlumType        @relation(fields: [plumTypeId], references: [id])
+  plumTypeId             Int
+  plumPipeLengthMetric   Decimal         @db.Decimal(10, 2)
+  plumPipeLengthImperial Decimal         @db.Decimal(10, 2)
+}
+
+model PlumPriceVersion {
+  id                Int                @id @default(autoincrement())
+  plumPriceVersion  String
+  PlumFittingPrices PlumFittingPrice[]
+  PlumPipePrices    PlumPipePrice[]
+}
+
+model PlumFittingPrice {
+  id                 Int              @id @default(autoincrement())
+  plumFittingPrice   Decimal          @db.Decimal(10, 2)
+  PlumPriceVersion   PlumPriceVersion @relation(fields: [plumPriceVersionId], references: [id])
+  plumPriceVersionId Int
+  PlumFittingInfo    PlumFittingInfo  @relation(fields: [plumFittingInfoId], references: [id])
+  plumFittingInfoId  Int
+}
+
+model PlumPipePrice {
+  id                 Int              @id @default(autoincrement())
+  plumPipePrices     Decimal          @db.Decimal(10, 2)
+  PlumPriceVersion   PlumPriceVersion @relation(fields: [plumPriceVersionId], references: [id])
+  plumPriceVersionId Int
+  PlumPipeInfo       PlumPipeInfo     @relation(fields: [plumPipeInfoId], references: [id])
+  plumPipeInfoId     Int
+}
