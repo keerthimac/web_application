@@ -15,6 +15,7 @@ app.get("/", (req, res) => {
 
 //Routes
 app.use("/api/subContractors", require("./routes/subContractorRoute"));
+app.use("/api/plumbing", require("./routes/plumRoute"));
 
 //Middleware
 app.use(errorHandler);
