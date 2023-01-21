@@ -1,6 +1,7 @@
 import FormInput from "./components/Inputs/FormInput";
 import ProjectAddInfo from "./pages/project/ProjectAddInfo";
-import TableComponent from "./components/Table/TableComponent";
+// import TableComponent from "./components/BasicTable/TableComponent";
+import TableComponent from "./components/PlumbingTable/TableComponent";
 import "./App.css";
 
 function App() {

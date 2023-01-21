@@ -16,10 +16,34 @@ const getPlumData = asyncHandler(async (req, res) => {
     const allBrands = await prisma.plumPipeInfo.findMany({
       select: {
         id: true,
+        PlumBrand: {
+          select: {
+            plumBrand: true,
+          },
+        },
+        PlumGrade: {
+          select: {
+            plumGrade: true,
+            plumStandard: true,
+          },
+        },
+        PlumSize: {
+          select: {
+            plumSizeImperial: true,
+          },
+        },
+        PlumPipeEndType: {
+          select: {
+            plumPipeEndType: true,
+          },
+        },
+        PlumType: {
+          select: {
+            plumType: true,
+          },
+        },
         plumPipeLengthImperial: true,
         plumPipeLengthMetric: true,
-        PlumBrand: true,
-        plumGradeId: true,
       },
     });
     // console.log(allBrands);
