@@ -1,7 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const { getPlumData } = require("../controllers/plumController");
+const {
+  getPipeData,
+  getFittingData,
+} = require("../controllers/plumController");
 
-router.get("/", getPlumData);
+router.get("/pipe", getPipeData);
+router.get("/fitting", getFittingData);
 
 module.exports = router;
