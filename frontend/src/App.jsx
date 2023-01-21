@@ -1,7 +1,8 @@
 import FormInput from "./components/Inputs/FormInput";
 import ProjectAddInfo from "./pages/project/ProjectAddInfo";
 // import TableComponent from "./components/BasicTable/TableComponent";
-import TableComponent from "./components/PlumbingTable/TableComponent";
+import PipeTable from "./components/PlumbingTable/PipeTable";
+import FittingTable from "./components/PlumbingTable/FittingTable";
 import "./App.css";
 
 function App() {
@@ -9,7 +10,8 @@ function App() {
     <div>
       {/* <ProjectAddInfo /> */}
       {/* <FormInput /> */}
-      <TableComponent />
+      {/* <PipeTable /> */}
+      <FittingTable />
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { useMemo, useState, useEffect } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
 import mockData from "../../../mockData.json";
-import { GROUP_COLUMNS, COLUMNS, PLUMBING_COLUMNS } from "./Columns/columns";
+import { GROUP_COLUMNS, COLUMNS, PIPE_COLUMNS } from "./Columns/columns";
 import GlobalFilter from "./GlobalFilter";
 import "./table.css";
 
@@ -10,9 +10,7 @@ function TableComponent() {
 
   const getPlumbingList = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/plumbing/fitting"
-      );
+      const response = await fetch("http://localhost:5000/api/plumbing/pipe");
       const data = await response.json();
       setPlumbingData(data);
       console.log(data);
@@ -25,7 +23,7 @@ function TableComponent() {
     getPlumbingList();
   }, []);
 
-  const columns = useMemo(() => PLUMBING_COLUMNS, []);
+  const columns = useMemo(() => PIPE_COLUMNS, []);
   const data = useMemo(() => plumbingData, [plumbingData]);
 
   const {

@@ -1,6 +1,51 @@
 import { format } from "date-fns";
 
-export const PLUMBING_COLUMNS = [
+export const FITTING_COLUMNS = [
+  {
+    Header: "Id",
+    Footer: "Id",
+    accessor: "id",
+  },
+  {
+    Header: "Fitting",
+    Footer: "Fitting",
+    accessor: "PlumFitting.plumFitting",
+  },
+  {
+    Header: "Plumbing Grade",
+    Footer: "Plumbing Grade",
+    accessor: "PlumGrade.plumGrade",
+  },
+  {
+    Header: "Size",
+    Footer: "Size",
+    accessor: "PlumSize.plumSizeImperial",
+  },
+  {
+    Header: "Type",
+    Footer: "Type",
+    accessor: "PlumType.plumType",
+  },
+  // {
+  //   Header: "Date of Birth",
+  //   Footer: "Date of Birth",
+  //   accessor: "date_of_birth",
+  //   Cell: ({ value }) => {
+  //     return format(new Date(value), "dd/mm/yyyy");
+  //   },
+  // },
+  // {
+  //   Header: "Country",
+  //   Footer: "Country",
+  //   accessor: "country",
+  // },
+  // {
+  //   Header: "Phone",
+  //   Footer: "Phone",
+  //   accessor: "phone",
+  // },
+];
+export const PIPE_COLUMNS = [
   {
     Header: "Id",
     Footer: "Id",
