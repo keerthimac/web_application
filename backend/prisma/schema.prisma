@@ -82,10 +82,18 @@ model PlumBrand {
   PlumPipeInfo    PlumPipeInfo[]
 }
 
+model PlumStandard {
+  id              Int         @id @default(autoincrement())
+  plumStandard    String
+  plumDescription String
+  PlumGrade       PlumGrade[]
+}
+
 model PlumGrade {
   id              Int               @id @default(autoincrement())
   plumGrade       String
-  plumStandard    String
+  PlumStandard    PlumStandard      @relation(fields: [plumStandardId], references: [id])
+  plumStandardId  Int
   PlumFittingInfo PlumFittingInfo[]
   PlumPipeInfo    PlumPipeInfo[]
 }

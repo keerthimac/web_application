@@ -65,34 +65,38 @@ const getFittingData = asyncHandler(async (req, res) => {
   //   res.status(200).json({ message: "Get all plumbing data" });
 
   const main = async function () {
-    const allBrands = await prisma.plumFittingInfo.findMany({
+    const allBrands = await prisma.plumFittingPrice.findMany({
       select: {
-        id: true,
-        PlumFitting: {
+        plumFittingPrice: true,
+        PlumFittingInfo: {
           select: {
-            plumFitting: true,
-          },
-        },
-        PlumBrand: {
-          select: {
-            plumBrand: true,
-          },
-        },
-        PlumGrade: {
-          select: {
-            plumGrade: true,
-            plumStandard: true,
-          },
-        },
-        PlumSize: {
-          select: {
-            plumSizeImperial: true,
-          },
-        },
+            id: true,
+            PlumFitting: {
+              select: {
+                plumFitting: true,
+              },
+            },
+            PlumBrand: {
+              select: {
+                plumBrand: true,
+              },
+            },
+            PlumGrade: {
+              select: {
+                plumGrade: true,
+              },
+            },
+            PlumSize: {
+              select: {
+                plumSizeImperial: true,
+              },
+            },
 
-        PlumType: {
-          select: {
-            plumType: true,
+            PlumType: {
+              select: {
+                plumType: true,
+              },
+            },
           },
         },
       },

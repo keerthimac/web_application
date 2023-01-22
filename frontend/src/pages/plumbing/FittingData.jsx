@@ -9,27 +9,37 @@ function FittingData() {
     {
       Header: "Id",
       Footer: "Id",
-      accessor: "id",
+      accessor: "PlumFittingInfo.id",
     },
     {
       Header: "Fitting",
       Footer: "Fitting",
-      accessor: "PlumFitting.plumFitting",
+      accessor: "PlumFittingInfo.PlumFitting.plumFitting",
     },
     {
       Header: "Plumbing Grade",
       Footer: "Plumbing Grade",
-      accessor: "PlumGrade.plumGrade",
+      accessor: "PlumFittingInfo.PlumGrade.plumGrade",
     },
     {
       Header: "Size",
       Footer: "Size",
-      accessor: "PlumSize.plumSizeImperial",
+      accessor: "PlumFittingInfo.PlumSize.plumSizeImperial",
     },
     {
       Header: "Type",
       Footer: "Type",
-      accessor: "PlumType.plumType",
+      accessor: "PlumFittingInfo.PlumType.plumType",
+    },
+    {
+      Header: "Brand",
+      Footer: "Brand",
+      accessor: "PlumFittingInfo.PlumBrand.plumBrand",
+    },
+    {
+      Header: "Price",
+      Footer: "Price",
+      accessor: "plumFittingPrice",
     },
   ];
 

@@ -16,9 +16,10 @@ function App() {
           <Navbar.Brand href='#home'>WEB APPLICATION</Navbar.Brand>
         </Container>
       </Navbar>
-      {/* <FittingData /> */}
-      <PipeData />
-      {/* <ProjectAddInfo /> */}
+      <Container>
+        <FittingData />
+        {/* <ProjectAddInfo /> */}
+      </Container>
     </div>
   );
 }
