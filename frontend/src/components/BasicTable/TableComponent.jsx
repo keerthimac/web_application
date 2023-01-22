@@ -1,13 +1,12 @@
 import { useMemo } from "react";
 import { useTable, useSortBy, useGlobalFilter } from "react-table";
-import mockData from "../../../mockData.json";
-import { GROUP_COLUMNS, COLUMNS } from "./Columns/columns";
 import GlobalFilter from "./GlobalFilter";
+import Table from "react-bootstrap/Table";
 import "./table.css";
 
-function TableComponent() {
-  const columns = useMemo(() => COLUMNS, []);
-  const data = useMemo(() => mockData, []);
+function TableComponent({ TableColumns, parentState }) {
+  const columns = useMemo(() => TableColumns, []);
+  const data = useMemo(() => parentState, [parentState]);
 
   const {
     getTableProps,
