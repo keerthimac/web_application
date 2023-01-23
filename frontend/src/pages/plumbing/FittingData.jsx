@@ -40,6 +40,14 @@ function FittingData() {
       Header: "Price",
       Footer: "Price",
       accessor: "plumFittingPrice",
+      Cell: ({ value }) => {
+        let number = Number(value);
+        let formatter = new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "LKR",
+        });
+        return formatter.format(number);
+      },
     },
   ];
 
