@@ -16,11 +16,6 @@ const getPipeData = asyncHandler(async (req, res) => {
     const allBrands = await prisma.plumPipeInfo.findMany({
       select: {
         id: true,
-        PlumBrand: {
-          select: {
-            plumBrand: true,
-          },
-        },
         PlumGrade: {
           select: {
             plumGrade: true,
@@ -67,6 +62,11 @@ const getFittingData = asyncHandler(async (req, res) => {
   const main = async function () {
     const allBrands = await prisma.plumFittingPrice.findMany({
       select: {
+        PlumBrand: {
+          select: {
+            plumBrand: true,
+          },
+        },
         plumFittingPrice: true,
         PlumFittingInfo: {
           select: {
@@ -74,11 +74,6 @@ const getFittingData = asyncHandler(async (req, res) => {
             PlumFitting: {
               select: {
                 plumFitting: true,
-              },
-            },
-            PlumBrand: {
-              select: {
-                plumBrand: true,
               },
             },
             PlumGrade: {

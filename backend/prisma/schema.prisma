@@ -76,10 +76,10 @@ model PlumFitting {
 }
 
 model PlumBrand {
-  id              Int               @id @default(autoincrement())
-  plumBrand       String
-  PlumFittingInfo PlumFittingInfo[]
-  PlumPipeInfo    PlumPipeInfo[]
+  id               Int                @id @default(autoincrement())
+  plumBrand        String
+  PlumFittingPrice PlumFittingPrice[]
+  PlumPipePrice    PlumPipePrice[]
 }
 
 model PlumStandard {
@@ -123,8 +123,6 @@ model PlumFittingInfo {
   id               Int                @id @default(autoincrement())
   PlumFitting      PlumFitting        @relation(fields: [plumFittingId], references: [id])
   plumFittingId    Int
-  PlumBrand        PlumBrand          @relation(fields: [plumBrandId], references: [id])
-  plumBrandId      Int
   PlumGrade        PlumGrade          @relation(fields: [plumGradeId], references: [id])
   plumGradeId      Int
   PlumSize         PlumSize           @relation(fields: [plumSizeId], references: [id])
@@ -136,8 +134,6 @@ model PlumFittingInfo {
 
 model PlumPipeInfo {
   id                     Int             @id @default(autoincrement())
-  PlumBrand              PlumBrand       @relation(fields: [plumBrandId], references: [id])
-  plumBrandId            Int
   PlumGrade              PlumGrade       @relation(fields: [plumGradeId], references: [id])
   plumGradeId            Int
   PlumSize               PlumSize        @relation(fields: [plumSizeId], references: [id])
@@ -165,6 +161,8 @@ model PlumFittingPrice {
   plumPriceVersionId Int
   PlumFittingInfo    PlumFittingInfo  @relation(fields: [plumFittingInfoId], references: [id])
   plumFittingInfoId  Int
+  PlumBrand          PlumBrand        @relation(fields: [plumBrandId], references: [id])
+  plumBrandId        Int
 }
 
 model PlumPipePrice {
@@ -174,4 +172,6 @@ model PlumPipePrice {
   plumPriceVersionId Int
   PlumPipeInfo       PlumPipeInfo     @relation(fields: [plumPipeInfoId], references: [id])
   plumPipeInfoId     Int
+  PlumBrand          PlumBrand        @relation(fields: [plumBrandId], references: [id])
+  plumBrandId        Int
 }
