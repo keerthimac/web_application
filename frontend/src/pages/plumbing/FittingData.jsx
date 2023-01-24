@@ -34,7 +34,7 @@ function FittingData() {
     {
       Header: "Brand",
       Footer: "Brand",
-      accessor: "PlumFittingInfo.PlumBrand.plumBrand",
+      accessor: "PlumBrand.plumBrand",
     },
     {
       Header: "Price",
@@ -58,7 +58,7 @@ function FittingData() {
       );
       const data = await response.json();
       setPlumbingData(data);
-      console.log(data);
+      // console.log(data);
     } catch (err) {
       console.error(err.message);
     }
