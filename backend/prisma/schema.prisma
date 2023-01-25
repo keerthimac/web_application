@@ -35,8 +35,7 @@ model ProjectStage {
 // one to meny relationship on subcontract & projects
 // one to meny relationship on subcontract & stages
 model SubContract {
-  subContractId Int @id @default(autoincrement())
-
+  subContractId   Int                   @id @default(autoincrement())
   subCompany      SubCompany            @relation(fields: [subCompanyId], references: [subCompanyId])
   subCompanyId    Int
   Project         Project               @relation(fields: [projectId], references: [projectId])
@@ -50,8 +49,7 @@ model SubContract {
 }
 
 model SubContractPayments {
-  subPaymentId Int @id @default(autoincrement())
-
+  subPaymentId  Int         @id @default(autoincrement())
   SubContract   SubContract @relation(fields: [subContractId], references: [subContractId])
   subContractId Int
 }
