@@ -1,5 +1,6 @@
 import FormInput from "./components/Inputs/FormInput";
 import ProjectAddInfo from "./pages/project/ProjectAddInfo";
+import SubPaymentsAdd from "./pages/subcontract/subPaymentsAdd";
 import FittingData from "./pages/plumbing/FittingData";
 import PipeData from "./pages/plumbing/PipeData";
 import "./App.css";
@@ -17,8 +18,9 @@ function App() {
         </Container>
       </Navbar>
       <Container>
-        <FittingData />
+        {/* <FittingData /> */}
         {/* <ProjectAddInfo /> */}
+        <SubPaymentsAdd />
       </Container>
     </div>
   );
