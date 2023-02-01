@@ -18,9 +18,9 @@ function App() {
         </Container>
       </Navbar>
       <Container>
-        {/* <FittingData /> */}
         {/* <ProjectAddInfo /> */}
         <SubPaymentsAdd />
+        <FittingData />
       </Container>
     </div>
   );
