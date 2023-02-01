@@ -1,4 +1,5 @@
 const express = require("express");
+const path = require("path");
 const colors = require("colors");
 const dontenv = require("dotenv").config();
 const PORT = process.env.PORT || 5000;
@@ -18,6 +19,19 @@ app.get("/", (req, res) => {
 //Routes
 app.use("/api/subContractors", require("./routes/subContractorRoute"));
 app.use("/api/plumbing", require("./routes/plumRoute"));
+
+// Serve frontend
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../frontend/dist")));
+
+  app.get("*", (req, res) =>
+    res.sendFile(
+      path.resolve(__dirname, "../", "frontend", "dist", "index.html")
+    )
+  );
+} else {
+  app.get("/", (req, res) => res.send("Please set to production"));
+}
 
 //Middleware
 app.use(errorHandler);
