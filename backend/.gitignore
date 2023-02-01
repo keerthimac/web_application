@@ -1,3 +1,5 @@
 .env
 /node_modules
 ~$*
+web_application_key.pem
+web_server_instance_info.txt
