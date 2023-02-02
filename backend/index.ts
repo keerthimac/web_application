@@ -1,7 +1,14 @@
-import { PrismaClient } from "@prisma/client";
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
-async function main() {}
+async function main() {
+  const data = await prisma.plumBrand.findFirst({
+    select: {
+      plumBrand: true,
+    },
+  });
+  console.log(data);
+}
 
 main()
   .then(async () => {
