@@ -53,9 +53,7 @@ function FittingData() {
 
   const getPlumbingList = async () => {
     try {
-      const response = await fetch(
-        "http://localhost:5000/api/plumbing/fitting"
-      );
+      const response = await fetch("/api/plumbing/fitting");
       const data = await response.json();
       setPlumbingData(data);
       // console.log(data);
