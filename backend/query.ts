@@ -1,13 +1,19 @@
 const { PrismaClient } = require("@prisma/client");
+
 const prisma = new PrismaClient();
 
 async function main() {
-  const data = await prisma.plumBrand.findFirst({
-    select: {
-      plumBrand: true,
-    },
-  });
-  console.log(data);
+  // const data = await prisma.plum_fitting_price.findMany({
+  //   select: {
+  //     plum_fitting_price: {
+  //       select: {
+  //         id: true,
+  //         plum_fitting_price: true,
+  //       },
+  //     },
+  //   },
+  // });
+  // console.log(data);
 }
 
 main()

@@ -9,37 +9,37 @@ function FittingData() {
     {
       Header: "Id",
       Footer: "Id",
-      accessor: "PlumFittingInfo.id",
+      accessor: "plum_fitting_info.id",
     },
     {
       Header: "Fitting",
       Footer: "Fitting",
-      accessor: "PlumFittingInfo.PlumFitting.plumFitting",
+      accessor: "plum_fitting_info.plum_fitting.plum_fitting",
     },
     {
       Header: "Plumbing Grade",
       Footer: "Plumbing Grade",
-      accessor: "PlumFittingInfo.PlumGrade.plumGrade",
+      accessor: "plum_fitting_info.plum_grade.plum_grade",
     },
     {
       Header: "Size",
       Footer: "Size",
-      accessor: "PlumFittingInfo.PlumSize.plumSizeImperial",
+      accessor: "plum_fitting_info.plum_size.plum_size_metric",
     },
     {
       Header: "Type",
       Footer: "Type",
-      accessor: "PlumFittingInfo.PlumType.plumType",
+      accessor: "plum_fitting_info.plum_type.plum_type",
     },
     {
       Header: "Brand",
       Footer: "Brand",
-      accessor: "PlumBrand.plumBrand",
+      accessor: "brand.brand",
     },
     {
       Header: "Price",
       Footer: "Price",
-      accessor: "plumFittingPrice",
+      accessor: "plum_fitting_price",
       Cell: ({ value }) => {
         let number = Number(value);
         let formatter = new Intl.NumberFormat("en-US", {
@@ -56,7 +56,7 @@ function FittingData() {
       const response = await fetch("/api/plumbing/fitting");
       const data = await response.json();
       setPlumbingData(data);
-      // console.log(data);
+      console.log(data);
     } catch (err) {
       console.error(err.message);
     }
