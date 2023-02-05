@@ -1,7 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Form, Button, Container } from "react-bootstrap";
 import FormInput from "../../components/Inputs/FormInput";
+import { Link } from "react-router-dom";
 
 export default function AddFittingData() {
   const [pressureFittingInfo, setPressureFittingInfo] = useState([
@@ -59,9 +59,12 @@ export default function AddFittingData() {
     // <div>
     //   <h1>Testing</h1>
     // </div>
-    <Container>
-      <Form>
-        <Form.Group className='mb-3 mt-3'>
+    <div>
+      <Link to='/plumbing' className='btn btn-ghost btn-sm rounded-btn'>
+        Back
+      </Link>
+      <form>
+        <div className='mb-3 mt-3'>
           {pressureFittingInfo.map((data) => (
             <FormInput
               key={data.id}
@@ -69,8 +72,8 @@ export default function AddFittingData() {
               onChange={(event) => handleChange(event, data.id)}
             />
           ))}
-        </Form.Group>
-      </Form>
-    </Container>
+        </div>
+      </form>
+    </div>
   );
 }

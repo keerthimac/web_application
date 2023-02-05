@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import TableComponent from "../../components/BasicTable/TableComponent";
+import { Link } from "react-router-dom";
 
 function FittingData() {
   const [plumbingData, setPlumbingData] = useState([]);
@@ -67,7 +68,17 @@ function FittingData() {
   }, []);
 
   return (
-    <div>
+    <div className='h-screen mt-5'>
+      <div className='flex justify-end'>
+        <Link
+          to='/plumbing/addfittingprice'
+          className='btn btn-ghost btn-sm rounded-btn'>
+          Add Plumbing Prices
+        </Link>
+        <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
+          Add Plumbing Info
+        </Link>
+      </div>
       <TableComponent
         TableColumns={FITTING_COLUMNS}
         parentState={plumbingData}

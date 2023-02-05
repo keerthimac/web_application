@@ -1,4 +1,3 @@
-import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
 import FormInput from "../../components/Inputs/FormInput";
 import LocationComponent from "../../components/LocationComponent";
@@ -33,9 +32,9 @@ function SubPaymentsAdd() {
   };
 
   return (
-    <Container>
-      <Form>
-        <Form.Group className='mb-3 mt-3'>
+    <div>
+      <form>
+        <div className='mb-3 mt-3'>
           <SelectForm
             label='Sub Contract'
             onChange={onChange}
@@ -52,9 +51,9 @@ function SubPaymentsAdd() {
               onChange={onChange}
             />
           ))}
-        </Form.Group>
-      </Form>
-    </Container>
+        </div>
+      </form>
+    </div>
   );
 }
 
