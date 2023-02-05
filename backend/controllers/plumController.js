@@ -5,8 +5,8 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-// @desc Get all subContractors
-// @route GET /api/subContractors
+// @desc Get all pipe data
+// @route GET /api/plumbing/pipe
 // @access Private
 
 const getPipeData = asyncHandler(async (req, res) => {
@@ -55,6 +55,10 @@ const getPipeData = asyncHandler(async (req, res) => {
       process.exit(1);
     });
 });
+
+// @desc Get all fitting_data
+// @route GET /api/plumbing/fitting
+// @access Private
 
 const getFittingData = asyncHandler(async (req, res) => {
   //   res.status(200).json({ message: "Get all plumbing data" });
@@ -111,7 +115,52 @@ const getFittingData = asyncHandler(async (req, res) => {
     });
 });
 
+// @desc Get all fitting pressure fittings
+// @route GET /api/plumbing/fitting
+// @access Private
+
+const getPressureFittingInfo = asyncHandler(async (req, res) => {
+  //   res.status(200).json({ message: "Get all plumbing data" });
+
+  const main = async function () {
+    const allBrands = await prisma.plum_fitting_info.findMany({
+      where: {
+        plum_type: {
+          plum_type: "Pressure fittings",
+        },
+      },
+
+      select: {
+        id: true,
+        plum_fitting: {
+          select: {
+            plum_fitting: true,
+          },
+        },
+        plum_size: {
+          select: {
+            plum_size_imperial: true,
+          },
+        },
+      },
+    });
+    // console.log(allBrands);
+    res.status(200).json(allBrands);
+  };
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+});
+
 module.exports = {
   getPipeData,
   getFittingData,
+  getPressureFittingInfo,
 };

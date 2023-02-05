@@ -1,19 +1,10 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Form, Button, Container } from "react-bootstrap";
 import FormInput from "../../components/Inputs/FormInput";
 
 export default function AddFittingData() {
-  const [pipeInfo, setPipeInfo] = useState({
-    clientName: "",
-    addressLine01: "",
-    addressLine02: "",
-    addressLine03: "",
-    province: "0",
-    district: "0",
-    city: "0",
-  });
-  const clientForm = [
+  const [pressureFittingInfo, setPressureFittingInfo] = useState([
     {
       id: 1,
       name: "clientName",
@@ -22,57 +13,63 @@ export default function AddFittingData() {
       label: "Client Name",
       required: true,
     },
-    {
-      id: 2,
-      name: "addressLine01",
-      type: "text",
-      placeholder: "Address Line 01",
-      label: "Address Line 01",
-      required: true,
-    },
-    {
-      id: 3,
-      name: "addressLine02",
-      type: "text",
-      placeholder: "Address Line 02",
-      label: "Address Line 02",
-      required: true,
-    },
-    {
-      id: 4,
-      name: "addressLine03",
-      type: "text",
-      placeholder: "Address Line 03",
-      label: "Address Line 03",
-      required: true,
-    },
-  ];
+  ]);
+  const [pressureFittingPrice, setPressureFittingPrice] = useState([]);
 
-  const onChange = (e) => {
-    setProjectInfo({
-      ...projectInfo,
-      [e.target.name]: e.target.value,
-    });
+  useEffect(() => {
+    getPressureFittingList();
+  }, []);
+
+  const getPressureFittingList = async () => {
+    try {
+      const response = await fetch("/api/plumbing/pressure_fitting_info");
+      const data = await response.json();
+      const priceArr = data.map((price) => {
+        return {
+          id: price.id,
+          fittingPrice: "",
+        };
+      });
+      const inputArr = data.map((obj) => {
+        return {
+          id: obj.id,
+          placeholder: `price`,
+          label: `${obj.plum_fitting.plum_fitting} ${obj.plum_size.plum_size_imperial}`,
+          type: "number",
+          required: true,
+          name: `${obj.plum_fitting.plum_fitting}_${obj.plum_size.plum_size_imperial}`,
+        };
+      });
+      setPressureFittingInfo(inputArr);
+      setPressureFittingPrice(priceArr);
+      console.log(inputArr);
+    } catch (err) {
+      console.error(err.message);
+    }
+  };
+
+  const handleChange = (e, id) => {
+    const newPrices = [...pressureFittingPrice];
+    const index = newPrices.findIndex((price) => price.id === id);
+    newPrices[index] = { id, fittingPrice: e.target.value };
+    setPressureFittingPrice(newPrices);
   };
 
   return (
+    // <div>
+    //   <h1>Testing</h1>
+    // </div>
     <Container>
       <Form>
         <Form.Group className='mb-3 mt-3'>
-          {clientForm.map((data) => (
+          {pressureFittingInfo.map((data) => (
             <FormInput
               key={data.id}
               {...data}
-              value={projectInfo[data.name]}
-              onChange={onChange}
+              onChange={(event) => handleChange(event, data.id)}
             />
           ))}
         </Form.Group>
-        <LocationComponent
-          onChange={onChange}
-          state={projectInfo}
-          setState={setProjectInfo}
-        />
       </Form>
     </Container>
   );

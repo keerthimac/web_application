@@ -74,10 +74,26 @@ model plum_fitting {
 }
 
 model brand {
-  id                 Int                  @id @default(autoincrement())
+  id                 Int                   @id @default(autoincrement())
   brand              String
   plum_fitting_price plum_fitting_price[]
   plum_pipe_price    plum_pipe_price[]
+  material           brands_on_materials[]
+}
+
+model material {
+  id       Int                   @id @default(autoincrement())
+  material String
+  brands   brands_on_materials[]
+}
+
+model brands_on_materials {
+  brand       brand    @relation(fields: [brand_id], references: [id])
+  brand_id    Int
+  material    material @relation(fields: [material_id], references: [id])
+  material_id Int
+
+  @@id([brand_id, material_id])
 }
 
 model plum_standard {

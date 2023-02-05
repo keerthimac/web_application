@@ -8,6 +8,7 @@ import "./App.css";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import AddFittingData from "./pages/plumbing/AddFittingData";
 
 function App() {
   return (
@@ -19,8 +20,9 @@ function App() {
       </Navbar>
       <Container>
         {/* <ProjectAddInfo /> */}
-        <SubPaymentsAdd />
-        <FittingData />
+        {/* <SubPaymentsAdd /> */}
+        {/* <FittingData /> */}
+        <AddFittingData />
       </Container>
     </div>
   );

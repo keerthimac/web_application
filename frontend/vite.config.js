@@ -9,6 +9,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api/plumbing/fitting": serverIp,
+      "/api/plumbing/pressure_fitting_info": serverIp,
     },
   },
 });
