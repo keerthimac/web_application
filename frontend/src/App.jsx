@@ -23,6 +23,7 @@ import PlumFittingData from "./pages/plumbing/PlumFittingData";
 import PlumPipeData from "./pages/plumbing/PlumPipeData";
 import PlumAddData from "./pages/plumbing/PlumAddData";
 import PlumAddPrice from "./pages/plumbing/PlumAddPrice";
+import PlumElementChoose from "./pages/plumbing/PlumElementChoose";
 
 // import "./App.css";
 
@@ -40,6 +41,10 @@ function App() {
                 <Route path='/about' element={<About />} />
                 <Route path='/plumbing' element={<Plumbing />} />
                 <Route path='/plumbing/brands' element={<PlumBrands />} />
+                <Route
+                  path='/plumbing/brands/:link'
+                  element={<PlumElementChoose />}
+                />
                 <Route
                   path='/plumbing/historical'
                   element={<PlumHistorical />}
