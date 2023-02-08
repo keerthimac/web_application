@@ -10,7 +10,7 @@ function ColorCard({ content }) {
         <h2 className='card-title'>{title}</h2>
         <p>{body}</p>
         <div className='card-actions justify-end'>
-          <Link to={link} className='btn rounded-btn'>
+          <Link to={`/${link}`} className='btn rounded-btn'>
             Go!
           </Link>
           {/* <button className='btn'>Go!</button> */}

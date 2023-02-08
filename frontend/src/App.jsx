@@ -45,6 +45,14 @@ function App() {
                   path='/plumbing/brands/:link'
                   element={<PlumElementChoose />}
                 />
+
+                {/* /plumbing/brands/BrandName/ Routes */}
+                <Route
+                  path='/plumbing/brands/:link/pressureFittings'
+                  element={<FittingData />}
+                />
+
+                {/* /Historical Route*/}
                 <Route
                   path='/plumbing/historical'
                   element={<PlumHistorical />}
@@ -52,13 +60,6 @@ function App() {
                 <Route
                   path='/plumbing/fittingData'
                   element={<PlumFittingData />}
-                />
-                <Route path='/plumbing/pipeData' element={<PlumPipeData />} />
-                <Route path='/plumbing/addPrice' element={<PlumAddPrice />} />
-                <Route path='/plumbing/addData' element={<PlumAddData />} />
-                <Route
-                  path='/plumbing/addFittingPrice'
-                  element={<AddFittingData />}
                 />
                 <Route path='/*' element={<NotFound />} />
                 <Route path='/notfound' element={<NotFound />} />

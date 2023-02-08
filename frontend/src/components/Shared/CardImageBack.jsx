@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function CardImageBack({ content }) {
   const { title, body, link, src } = content;
 
-  console.log(title);
+  // console.log(title);
 
   return (
     <div className='card w-50 bg-base-100 shadow-xl image-full'>
@@ -15,9 +15,7 @@ function CardImageBack({ content }) {
         <h2 className='card-title'>{title}</h2>
         <p>{body}</p>
         <div className='card-actions justify-end'>
-          <Link
-            to={`/plumbing/brands/${link}`}
-            className='btn btn-primary rounded-btn'>
+          <Link to={`/${link}`} className='btn btn-primary rounded-btn'>
             Go!
           </Link>
         </div>

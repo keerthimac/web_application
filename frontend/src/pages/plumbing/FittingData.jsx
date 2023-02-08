@@ -1,10 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import TableComponent from "../../components/BasicTable/TableComponent";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 function FittingData() {
   const [plumbingData, setPlumbingData] = useState([]);
+
+  let { id } = useParams();
 
   const FITTING_COLUMNS = [
     {
@@ -69,15 +71,16 @@ function FittingData() {
 
   return (
     <div className='h-screen mt-5'>
+      <h1>{id}</h1>
       <div className='flex justify-end'>
-        <Link
+        {/* <Link
           to='/plumbing/addfittingprice'
           className='btn btn-ghost btn-sm rounded-btn'>
           Add Plumbing Prices
         </Link>
         <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
           Add Plumbing Info
-        </Link>
+        </Link> */}
       </div>
       <TableComponent
         TableColumns={FITTING_COLUMNS}
