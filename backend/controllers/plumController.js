@@ -62,10 +62,27 @@ const getPipeData = asyncHandler(async (req, res) => {
 
 const getFittingData = asyncHandler(async (req, res) => {
   //   res.status(200).json({ message: "Get all plumbing data" });
+  const { type, brand } = req.params;
+  // console.log(type, brand);
 
   const main = async function () {
     const allBrands = await prisma.plum_fitting_price.findMany({
+      where: {
+        brand: {
+          brand: {
+            contains: `${brand}`,
+          },
+        },
+        plum_fitting_info: {
+          plum_type: {
+            plum_type: {
+              contains: `${type}`,
+            },
+          },
+        },
+      },
       select: {
+        id: true,
         brand: {
           select: {
             brand: true,
@@ -90,7 +107,6 @@ const getFittingData = asyncHandler(async (req, res) => {
                 plum_size_metric: true,
               },
             },
-
             plum_type: {
               select: {
                 plum_type: true,
@@ -120,26 +136,52 @@ const getFittingData = asyncHandler(async (req, res) => {
 // @access Private
 
 const getPressureFittingInfo = asyncHandler(async (req, res) => {
-  //   res.status(200).json({ message: "Get all plumbing data" });
-
   const main = async function () {
-    const allBrands = await prisma.plum_fitting_info.findMany({
+    const allBrands = await prisma.plum_fitting_price.findMany({
       where: {
-        plum_type: {
-          plum_type: "Pressure fittings",
-        },
-      },
-
-      select: {
-        id: true,
-        plum_fitting: {
-          select: {
-            plum_fitting: true,
+        brand: {
+          brand: {
+            contains: "slon",
           },
         },
-        plum_size: {
+        plum_fitting_info: {
+          plum_type: {
+            plum_type: {
+              contains: "Pressure fittings",
+            },
+          },
+        },
+      },
+      select: {
+        brand: {
           select: {
-            plum_size_imperial: true,
+            brand: true,
+          },
+        },
+        plum_fitting_price: true,
+        plum_fitting_info: {
+          select: {
+            id: true,
+            plum_fitting: {
+              select: {
+                plum_fitting: true,
+              },
+            },
+            plum_grade: {
+              select: {
+                plum_grade: true,
+              },
+            },
+            plum_size: {
+              select: {
+                plum_size_metric: true,
+              },
+            },
+            plum_type: {
+              select: {
+                plum_type: true,
+              },
+            },
           },
         },
       },

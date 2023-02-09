@@ -17,14 +17,14 @@ function PlumElementChoose() {
       title: "PVC Pressure Fittings",
       body: "Pressure fitting Data with current prices",
       src: PressureFittings,
-      link: `plumbing/brands/${link}/pressureFittings`,
+      link: `plumbing/brands/${link}/pressure_fittings`,
     },
     {
       id: 2,
       title: "PVC Drainage Fittings",
       body: "Drainage fitting Data with current prices",
       src: DrainageFittings,
-      link: `plumbing/brands/${link}/drainageFittings`,
+      link: `plumbing/brands/${link}/drainage_fittings`,
     },
     {
       id: 3,
@@ -37,14 +37,14 @@ function PlumElementChoose() {
       id: 4,
       title: "CPVC Fittings",
       src: CpvcFittings,
-      link: `plumbing/brands/${link}/cpvcFittings`,
+      link: `plumbing/brands/${link}/cpvc_fittings`,
     },
     {
       id: 5,
       title: "CPVC Pipes",
       body: "fitting Data with current prices",
       src: CpvcPipes,
-      link: `plumbing/brands/${link}/cpvcPipes`,
+      link: `plumbing/brands/${link}/cpvc_pipes`,
     },
   ];
 

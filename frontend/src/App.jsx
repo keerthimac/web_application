@@ -48,7 +48,7 @@ function App() {
 
                 {/* /plumbing/brands/BrandName/ Routes */}
                 <Route
-                  path='/plumbing/brands/:link/pressureFittings'
+                  path='/plumbing/brands/:link/:fittingType'
                   element={<FittingData />}
                 />
 
@@ -60,6 +60,10 @@ function App() {
                 <Route
                   path='/plumbing/fittingData'
                   element={<PlumFittingData />}
+                />
+                <Route
+                  path='/plumbing/addFittingPrice'
+                  element={<AddFittingData />}
                 />
                 <Route path='/*' element={<NotFound />} />
                 <Route path='/notfound' element={<NotFound />} />

@@ -7,7 +7,6 @@ const {
 } = require("../controllers/plumController");
 
 router.get("/pipe", getPipeData);
-router.get("/fitting", getFittingData);
-router.get("/pressure_fitting_info", getPressureFittingInfo);
+router.get("/fitting/:type/:brand", getFittingData);
 
 module.exports = router;

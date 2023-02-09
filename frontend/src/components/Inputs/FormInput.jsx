@@ -9,15 +9,18 @@ function FormInput(props) {
   // };
 
   return (
-    <div>
+    <div className='form-control flex-row'>
       <div className='mb-3 mt-3'>
-        <label>{label}</label>
-        <input
-          {...inputProps}
-          onChange={onChange}
-          // onBlur={handleFocus}
-          // focused={focused.toString()}
-        />
+        <label className='py-2 input-group input-group-vertical'>
+          <span className='py-1'>{label}</span>
+          <input
+            className='input input-bordered'
+            {...inputProps}
+            onChange={onChange}
+            // onBlur={handleFocus}
+            // focused={focused.toString()}
+          />
+        </label>
       </div>
     </div>
   );

@@ -1,5 +1,4 @@
 import { PrismaClient } from "@prisma/client";
-// const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
@@ -53,8 +52,38 @@ const main = async function () {
         },
       },
     },
-    include: {
-      plum_fitting_info: true,
+    select: {
+      brand: {
+        select: {
+          brand: true,
+        },
+      },
+      plum_fitting_price: true,
+      plum_fitting_info: {
+        select: {
+          id: true,
+          plum_fitting: {
+            select: {
+              plum_fitting: true,
+            },
+          },
+          plum_grade: {
+            select: {
+              plum_grade: true,
+            },
+          },
+          plum_size: {
+            select: {
+              plum_size_metric: true,
+            },
+          },
+          plum_type: {
+            select: {
+              plum_type: true,
+            },
+          },
+        },
+      },
     },
   });
 

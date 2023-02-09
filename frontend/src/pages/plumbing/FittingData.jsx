@@ -6,7 +6,8 @@ import { Link, useParams } from "react-router-dom";
 function FittingData() {
   const [plumbingData, setPlumbingData] = useState([]);
 
-  let { id } = useParams();
+  const { fittingType, link } = useParams();
+  console.log(fittingType, link);
 
   const FITTING_COLUMNS = [
     {
@@ -56,7 +57,9 @@ function FittingData() {
 
   const getPlumbingList = async () => {
     try {
-      const response = await fetch("/api/plumbing/fitting");
+      const response = await fetch(
+        `/api/plumbing/fitting/${fittingType}/${link}`
+      );
       const data = await response.json();
       setPlumbingData(data);
       console.log(data);
@@ -71,7 +74,6 @@ function FittingData() {
 
   return (
     <div className='h-screen mt-5'>
-      <h1>{id}</h1>
       <div className='flex justify-end'>
         {/* <Link
           to='/plumbing/addfittingprice'
