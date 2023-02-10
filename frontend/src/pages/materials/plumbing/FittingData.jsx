@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import TableComponent from "../../components/BasicTable/TableComponent";
+import TableComponent from "../../../components/BasicTable/TableComponent";
 import { Link, useParams } from "react-router-dom";
 
 function FittingData() {

@@ -1,5 +1,5 @@
 import React from "react";
-import ColorCard from "../../components/Shared/ColorCard";
+import ColorCard from "../../../components/Shared/ColorCard";
 
 function Plumbing() {
   const content = [

@@ -14,16 +14,16 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
 
-import FittingData from "./pages/plumbing/FittingData";
-import AddFittingData from "./pages/plumbing/AddFittingData";
-import Plumbing from "./pages/plumbing/Plumbing";
-import PlumBrands from "./pages/plumbing/PlumBrands";
-import PlumHistorical from "./pages/plumbing/PlumHistorical";
-import PlumFittingData from "./pages/plumbing/PlumFittingData";
-import PlumPipeData from "./pages/plumbing/PlumPipeData";
-import PlumAddData from "./pages/plumbing/PlumAddData";
-import PlumAddPrice from "./pages/plumbing/PlumAddPrice";
-import PlumElementChoose from "./pages/plumbing/PlumElementChoose";
+import FittingData from "./pages/materials/plumbing/FittingData";
+import AddFittingData from "./pages/materials/plumbing/AddFittingData";
+import Plumbing from "./pages/materials/plumbing/Plumbing";
+import PlumBrands from "./pages/materials/plumbing/PlumBrands";
+import PlumHistorical from "./pages/materials/plumbing/PlumHistorical";
+import PlumFittingData from "./pages/materials/plumbing/PlumFittingData";
+import PlumPipeData from "./pages/materials/plumbing/PlumPipeData";
+import PlumAddData from "./pages/materials/plumbing/PlumAddData";
+import PlumAddPrice from "./pages/materials/plumbing/PlumAddPrice";
+import PlumElementChoose from "./pages/materials/plumbing/PlumElementChoose";
 
 // import "./App.css";
 

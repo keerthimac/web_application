@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import FormInput from "../../components/Inputs/FormInput";
+import FormInput from "../../../components/Inputs/FormInput";
 import { Link } from "react-router-dom";
 
 export default function AddFittingData() {

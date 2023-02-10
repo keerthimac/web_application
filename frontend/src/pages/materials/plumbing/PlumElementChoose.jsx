@@ -1,12 +1,11 @@
 import React from "react";
-import ColorCard from "../../components/Shared/ColorCard";
-import CardImageBack from "../../components/Shared/CardImageBack";
+import CardImageBack from "../../../components/Shared/CardImageBack";
 import { useParams } from "react-router-dom";
-import DrainageFittings from "../../images/plumbing/DrainageFittings.jpg";
-import PressureFittings from "../../images/plumbing/PressureFittings.jpg";
-import PvcPipes from "../../images/plumbing/PvcPipes.jpg";
-import CpvcFittings from "../../images/plumbing/CpvcFittings.jpg";
-import CpvcPipes from "../../images/plumbing/CpvcPipes.jpg";
+import DrainageFittings from "../../../images/plumbing/DrainageFittings.jpg";
+import PressureFittings from "../../../images/plumbing/PressureFittings.jpg";
+import PvcPipes from "../../../images/plumbing/PvcPipes.jpg";
+import CpvcFittings from "../../../images/plumbing/CpvcFittings.jpg";
+import CpvcPipes from "../../../images/plumbing/CpvcPipes.jpg";
 
 function PlumElementChoose() {
   const { link } = useParams();

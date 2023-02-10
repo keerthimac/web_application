@@ -1,9 +1,9 @@
 import React from "react";
-import CardImageBack from "../../components/Shared/CardImageBack";
+import CardImageBack from "../../../components/Shared/CardImageBack";
 import { useParams } from "react-router-dom";
-import slon from "../../images/plumbing/slon.jpg";
-import anton from "../../images/plumbing/Anton.jpg";
-import national from "../../images/plumbing/national.jpg";
+import slon from "../../../images/plumbing/slon.jpg";
+import anton from "../../../images/plumbing/Anton.jpg";
+import national from "../../../images/plumbing/national.jpg";
 
 function PlumBrands() {
   const content = [
