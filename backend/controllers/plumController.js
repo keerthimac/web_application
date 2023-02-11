@@ -56,6 +56,35 @@ const getPipeData = asyncHandler(async (req, res) => {
     });
 });
 
+// @desc Get all brands
+// @route GET /api/plumbing/fitting
+// @access Private
+
+const getBrands = asyncHandler(async (req, res) => {
+  //   res.status(200).json({ message: "Get all plumbing data" });
+
+  const main = async function () {
+    const allBrands = await prisma.brand.findMany({
+      select: {
+        id: true,
+        brand: true,
+      },
+    });
+    console.log(allBrands);
+    res.status(200).json(allBrands);
+  };
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+});
+
 // @desc Get all fitting_data
 // @route GET /api/plumbing/fitting
 // @access Private
@@ -205,4 +234,5 @@ module.exports = {
   getPipeData,
   getFittingData,
   getPressureFittingInfo,
+  getBrands,
 };
