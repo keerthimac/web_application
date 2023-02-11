@@ -10,6 +10,7 @@ export default defineConfig({
     proxy: {
       "/api/plumbing/fitting": serverIp,
       "/api/plumbing/brand": serverIp,
+      "/api/plumbing/plum_type": serverIp,
       // "/api/plumbing/pressure_fitting/slon": serverIp,
     },
   },
