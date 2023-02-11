@@ -45,13 +45,13 @@ function App() {
                   <Route path='/plumbing' element={<Plumbing />} />
                   <Route path='/plumbing/brands' element={<PlumBrands />} />
                   <Route
-                    path='/plumbing/brands/:link'
+                    path='/plumbing/brands/:brand'
                     element={<PlumElementChoose />}
                   />
 
                   {/* /plumbing/brands/BrandName/ Routes */}
                   <Route
-                    path='/plumbing/brands/:link/:fittingType'
+                    path='/plumbing/brands/:brand/:plum_type'
                     element={<FittingData />}
                   />
 
