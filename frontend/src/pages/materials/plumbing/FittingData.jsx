@@ -1,10 +1,13 @@
 import React from "react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import PlumbingContext from "../../../context/materials/PlumbingContext";
 import TableComponent from "../../../components/BasicTable/TableComponent";
 import { Link, useParams } from "react-router-dom";
 
 function FittingData() {
   const [plumbingData, setPlumbingData] = useState([]);
+
+  const { fittingList, getFittingList } = useContext(PlumbingContext);
 
   const { fittingType, link } = useParams();
   console.log(fittingType, link);
@@ -69,7 +72,8 @@ function FittingData() {
   };
 
   useEffect(() => {
-    getPlumbingList();
+    // getPlumbingList();
+    getFittingList();
   }, []);
 
   return (
@@ -86,7 +90,7 @@ function FittingData() {
       </div>
       <TableComponent
         TableColumns={FITTING_COLUMNS}
-        parentState={plumbingData}
+        parentState={fittingList}
       />
     </div>
   );
