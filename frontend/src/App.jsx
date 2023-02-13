@@ -24,6 +24,7 @@ import PlumFittingData from "./pages/materials/plumbing/PlumFittingData";
 import PlumPipeData from "./pages/materials/plumbing/PlumPipeData";
 import PlumAddData from "./pages/materials/plumbing/PlumAddData";
 import PlumAddPrice from "./pages/materials/plumbing/PlumAddPrice";
+import PlumTypeChoose from "./pages/materials/plumbing/PlumTypeChoose";
 import PlumElementChoose from "./pages/materials/plumbing/PlumElementChoose";
 
 // import "./App.css";
@@ -44,15 +45,27 @@ function App() {
 
                   <Route path='/plumbing' element={<Plumbing />} />
                   <Route path='/plumbing/brands' element={<PlumBrands />} />
+                  {/* <Route
+                    path='/plumbing/brands/:brandId'
+                    element={<PlumTypeChoose />}
+                  /> */}
                   <Route
-                    path='/plumbing/brands/:brand'
+                    path='/plumbing/brands/:brandId'
                     element={<PlumElementChoose />}
                   />
 
                   {/* /plumbing/brands/BrandName/ Routes */}
                   <Route
-                    path='/plumbing/brands/:brand/:plum_type'
+                    path='/plumbing/brands/:brandId/:plumType'
+                    element={<PlumTypeChoose />}
+                  />
+                  <Route
+                    path='/plumbing/brands/:brandId/fittingData/:plumFittingTypeId'
                     element={<FittingData />}
+                  />
+                  <Route
+                    path='/plumbing/brands/:brandId/fittingData/:plumFittingTypeId/addData'
+                    element={<AddFittingData />}
                   />
 
                   {/* /Historical Route*/}
@@ -60,14 +73,14 @@ function App() {
                     path='/plumbing/historical'
                     element={<PlumHistorical />}
                   />
-                  <Route
+                  {/* <Route
                     path='/plumbing/fittingData'
                     element={<PlumFittingData />}
-                  />
-                  <Route
+                  /> */}
+                  {/* <Route
                     path='/plumbing/addFittingPrice'
                     element={<AddFittingData />}
-                  />
+                  /> */}
 
                   <Route path='/*' element={<NotFound />} />
                   <Route path='/notfound' element={<NotFound />} />

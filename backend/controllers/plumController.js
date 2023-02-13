@@ -89,14 +89,39 @@ const getBrands = asyncHandler(async (req, res) => {
 // @route GET /api/plumbing/fitting
 // @access Private
 
-const getPlumTypes = asyncHandler(async (req, res) => {
+const getPlumFittingTypes = asyncHandler(async (req, res) => {
   //   res.status(200).json({ message: "Get all plumbing data" });
 
   const main = async function () {
-    const allBrands = await prisma.plum_type.findMany({
+    const allBrands = await prisma.plum_fitting_type.findMany({
       select: {
         id: true,
-        plum_type: true,
+        plum_fitting_type: true,
+      },
+    });
+    console.log(allBrands);
+    res.status(200).json(allBrands);
+  };
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+});
+
+const getPlumPipeTypes = asyncHandler(async (req, res) => {
+  //   res.status(200).json({ message: "Get all plumbing data" });
+
+  const main = async function () {
+    const allBrands = await prisma.plum_pipe_type.findMany({
+      select: {
+        id: true,
+        plum_pipe_type: true,
       },
     });
     console.log(allBrands);
@@ -118,23 +143,23 @@ const getPlumTypes = asyncHandler(async (req, res) => {
 // @route GET /api/plumbing/fitting
 // @access Private
 
-const getFittingData = asyncHandler(async (req, res) => {
+const getFittingPriceData = asyncHandler(async (req, res) => {
   //   res.status(200).json({ message: "Get all plumbing data" });
-  const { type, brand } = req.params;
-  // console.log(type, brand);
+  const { plumTypeId, brandId } = req.params;
+  console.log(plumTypeId, brandId);
 
   const main = async function () {
     const allBrands = await prisma.plum_fitting_price.findMany({
       where: {
         brand: {
-          brand: {
-            contains: `${brand}`,
+          id: {
+            equals: parseInt(brandId),
           },
         },
         plum_fitting_info: {
-          plum_type: {
-            plum_type: {
-              contains: `${type}`,
+          plum_fitting_type: {
+            id: {
+              equals: parseInt(plumTypeId),
             },
           },
         },
@@ -165,16 +190,16 @@ const getFittingData = asyncHandler(async (req, res) => {
                 plum_size_metric: true,
               },
             },
-            plum_type: {
+            plum_fitting_type: {
               select: {
-                plum_type: true,
+                plum_fitting_type: true,
               },
             },
           },
         },
       },
     });
-    // console.log(allBrands);
+    // console.log(plumTypeId, brandId);
     res.status(200).json(allBrands);
   };
 
@@ -193,53 +218,38 @@ const getFittingData = asyncHandler(async (req, res) => {
 // @route GET /api/plumbing/fitting
 // @access Private
 
-const getPressureFittingInfo = asyncHandler(async (req, res) => {
+const getFittingData = asyncHandler(async (req, res) => {
+  const { plumTypeId } = req.params;
+
   const main = async function () {
-    const allBrands = await prisma.plum_fitting_price.findMany({
+    const allBrands = await prisma.plum_fitting_info.findMany({
       where: {
-        brand: {
-          brand: {
-            contains: "slon",
-          },
-        },
-        plum_fitting_info: {
-          plum_type: {
-            plum_type: {
-              contains: "Pressure fittings",
-            },
+        plum_fitting_type: {
+          id: {
+            equals: parseInt(plumTypeId),
           },
         },
       },
       select: {
-        brand: {
+        id: true,
+        plum_fitting: {
           select: {
-            brand: true,
+            plum_fitting: true,
           },
         },
-        plum_fitting_price: true,
-        plum_fitting_info: {
+        plum_grade: {
           select: {
-            id: true,
-            plum_fitting: {
-              select: {
-                plum_fitting: true,
-              },
-            },
-            plum_grade: {
-              select: {
-                plum_grade: true,
-              },
-            },
-            plum_size: {
-              select: {
-                plum_size_metric: true,
-              },
-            },
-            plum_type: {
-              select: {
-                plum_type: true,
-              },
-            },
+            plum_grade: true,
+          },
+        },
+        plum_size: {
+          select: {
+            plum_size_metric: true,
+          },
+        },
+        plum_fitting_type: {
+          select: {
+            plum_fitting_type: true,
           },
         },
       },
@@ -261,8 +271,9 @@ const getPressureFittingInfo = asyncHandler(async (req, res) => {
 
 module.exports = {
   getPipeData,
+  getFittingPriceData,
   getFittingData,
-  getPressureFittingInfo,
   getBrands,
-  getPlumTypes,
+  getPlumFittingTypes,
+  getPlumPipeTypes,
 };

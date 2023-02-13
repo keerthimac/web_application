@@ -1,16 +1,18 @@
 import React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import PlumbingContext from "../../../context/materials/PlumbingContext";
 import TableComponent from "../../../components/BasicTable/TableComponent";
 import { Link, useParams } from "react-router-dom";
+import BackButton from "../../../components/Shared/BackButton";
+import Button from "../../../components/Shared/Button";
 
 function FittingData() {
-  const [plumbingData, setPlumbingData] = useState([]);
+  const { fittingPriceList, getFittingPriceList, getFittingList } =
+    useContext(PlumbingContext);
 
-  const { fittingList, getFittingList } = useContext(PlumbingContext);
-
-  const { fittingType, link } = useParams();
-  console.log(fittingType, link);
+  const { plumFittingTypeId, brandId } = useParams();
+  const test = useParams();
+  console.log(test);
 
   const FITTING_COLUMNS = [
     {
@@ -36,7 +38,7 @@ function FittingData() {
     {
       Header: "Type",
       Footer: "Type",
-      accessor: "plum_fitting_info.plum_type.plum_type",
+      accessor: "plum_fitting_info.plum_fitting_type.plum_fitting_type",
     },
     {
       Header: "Brand",
@@ -58,39 +60,23 @@ function FittingData() {
     },
   ];
 
-  const getPlumbingList = async () => {
-    try {
-      const response = await fetch(
-        `/api/plumbing/fitting/${fittingType}/${link}`
-      );
-      const data = await response.json();
-      setPlumbingData(data);
-      console.log(data);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
-
   useEffect(() => {
-    // getPlumbingList();
-    getFittingList();
+    getFittingPriceList(plumFittingTypeId, brandId);
+    getFittingList(plumFittingTypeId);
   }, []);
 
   return (
     <div className='h-screen mt-5'>
-      <div className='flex justify-end'>
-        {/* <Link
-          to='/plumbing/addfittingprice'
-          className='btn btn-ghost btn-sm rounded-btn'>
-          Add Plumbing Prices
-        </Link>
-        <Link to='/about' className='btn btn-ghost btn-sm rounded-btn'>
-          Add Plumbing Info
-        </Link> */}
+      <div className='flex justify-between mb-10'>
+        <BackButton />
+        <Button
+          content={"Add Price"}
+          link={`/plumbing/brands/${brandId}/fittingData/${plumFittingTypeId}/addData`}
+        />
       </div>
       <TableComponent
         TableColumns={FITTING_COLUMNS}
-        parentState={fittingList}
+        parentState={fittingPriceList}
       />
     </div>
   );

@@ -5,7 +5,6 @@ const PlumbingContext = createContext();
 
 const PLUMBING_URL = import.meta.env.VITE_REACT_APP_PLUMBING_URL;
 // const GITHUB_TOKEN = import.meta.env.VITE_REACT_APP_GITHUB_TOKEN;
-console.log(PLUMBING_URL);
 
 export const PlumbingProvider = ({ children }) => {
   const initialState = {
@@ -13,6 +12,7 @@ export const PlumbingProvider = ({ children }) => {
     brand: "",
     elements: [],
     element: "",
+    fittingPriceList: [],
     fittingList: [],
     loading: false,
   };
@@ -23,16 +23,31 @@ export const PlumbingProvider = ({ children }) => {
   const setLoading = () => dispatch({ type: "SET_LOADING" });
 
   //JUST FOR TESTING
-  const getFittingList = async () => {
+  const getFittingPriceList = async (fittingTypeId, brandId) => {
     try {
       const response = await fetch(
-        `/api/plumbing/fitting/pressure_fittings/slon`
+        `/api/plumbing/fitting/${fittingTypeId}/${brandId}`
       );
+      const data = await response.json();
+      // console.log(data);
+
+      dispatch({
+        type: "SET_FITTING_PRICE_DATA",
+        payload: data,
+      });
+    } catch (err) {
+      console.log(err.message);
+    }
+  };
+
+  const getFittingList = async (fittingTypeId) => {
+    try {
+      const response = await fetch(`/api/plumbing/fitting/${fittingTypeId}`);
       const data = await response.json();
 
       console.log(data);
       dispatch({
-        type: "GET_FITTING_DATA",
+        type: "SET_FITTING_DATA",
         payload: data,
       });
     } catch (err) {
@@ -46,9 +61,11 @@ export const PlumbingProvider = ({ children }) => {
         brands: state.brands,
         brand: state.brand,
         fittingList: state.fittingList,
+        fittingPriceList: state.fittingPriceList,
         elements: state.elements,
         element: state.element,
         loading: state.loading,
+        getFittingPriceList,
         getFittingList,
       }}>
       {children}

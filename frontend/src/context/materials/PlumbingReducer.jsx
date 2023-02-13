@@ -1,6 +1,12 @@
 const plumbingReducer = (state, action) => {
   switch (action.type) {
-    case "GET_FITTING_DATA":
+    case "SET_FITTING_PRICE_DATA":
+      return {
+        ...state,
+        fittingPriceList: action.payload,
+        loading: false,
+      };
+    case "SET_FITTING_DATA":
       return {
         ...state,
         fittingList: action.payload,

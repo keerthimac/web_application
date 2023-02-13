@@ -2,15 +2,18 @@ const express = require("express");
 const router = express.Router();
 const {
   getPipeData,
-  getFittingData,
-  getPressureFittingInfo,
+  getFittingPriceData,
   getBrands,
-  getPlumTypes,
+  getFittingData,
+  getPlumFittingTypes,
+  getPlumPipeTypes,
 } = require("../controllers/plumController");
 
 router.get("/pipe", getPipeData);
 router.get("/brands", getBrands);
-router.get("/plum_type", getPlumTypes);
-router.get("/fitting/:type/:brand", getFittingData);
+router.get("/fitting/:plumTypeId", getFittingData);
+router.get("/plum_fitting_type", getPlumFittingTypes);
+router.get("/plum_pipe_type", getPlumPipeTypes);
+router.get("/fitting/:plumTypeId/:brandId", getFittingPriceData);
 
 module.exports = router;

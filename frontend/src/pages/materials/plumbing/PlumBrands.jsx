@@ -3,6 +3,7 @@ import CardImageBack from "../../../components/Shared/CardImageBack";
 import slon from "../../../images/plumbing/slon.jpg";
 import anton from "../../../images/plumbing/Anton.jpg";
 import national from "../../../images/plumbing/national.jpg";
+import BackButton from "../../../components/Shared/BackButton";
 
 function PlumBrands() {
   const [brands, setBrands] = useState([]);
@@ -18,7 +19,7 @@ function PlumBrands() {
           id: obj.id,
           title: obj.brand,
           body: `View the what Elements ${obj.brand} Brand offers and see current prices`,
-          link: `plumbing/brands/${obj.brand}`,
+          buttons: [{ id: 1, value: "Go", link: `plumbing/brands/${obj.id}` }],
           src:
             obj.brand == "Slon"
               ? slon
@@ -40,10 +41,13 @@ function PlumBrands() {
   }, []);
 
   return (
-    <div className='mt-10 grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
-      {brands.map((item) => (
-        <CardImageBack key={item.id} content={item} />
-      ))}
+    <div>
+      <BackButton />
+      <div className='mt-5 grid grid-cols-1 gap-8 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
+        {brands.map((item) => (
+          <CardImageBack key={item.id} content={item} />
+        ))}
+      </div>
     </div>
   );
 }

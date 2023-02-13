@@ -120,11 +120,16 @@ model plum_size {
   plum_pipe_info     plum_pipe_info[]
 }
 
-model plum_type {
+model plum_pipe_type {
+  id             Int              @id @default(autoincrement())
+  plum_pipe_type String
+  plum_pipe_info plum_pipe_info[]
+}
+
+model plum_fitting_type {
   id                Int                 @id @default(autoincrement())
-  plum_type         String
+  plum_fitting_type String
   plum_fitting_info plum_fitting_info[]
-  plum_pipe_info    plum_pipe_info[]
 }
 
 model plum_pipe_end_type {
@@ -134,31 +139,32 @@ model plum_pipe_end_type {
 }
 
 model plum_fitting_info {
-  id                 Int                  @id @default(autoincrement())
-  plum_fitting       plum_fitting         @relation(fields: [plum_fitting_id], references: [id])
-  plum_fitting_id    Int
-  plum_grade         plum_grade           @relation(fields: [plum_grade_id], references: [id])
-  plum_grade_id      Int
-  plum_size          plum_size            @relation(fields: [plum_size_id], references: [id])
-  plum_size_id       Int
-  plum_fitting_price plum_fitting_price[]
-  plum_type          plum_type            @relation(fields: [plum_type_id], references: [id])
-  plum_type_id       Int
+  id                   Int                  @id @default(autoincrement())
+  plum_fitting         plum_fitting         @relation(fields: [plum_fitting_id], references: [id])
+  plum_fitting_id      Int
+  plum_grade           plum_grade           @relation(fields: [plum_grade_id], references: [id])
+  plum_grade_id        Int
+  plum_size            plum_size            @relation(fields: [plum_size_id], references: [id])
+  plum_size_id         Int
+  plum_fitting_price   plum_fitting_price[]
+  plum_fitting_type    plum_fitting_type    @relation(fields: [plum_fitting_type_Id], references: [id])
+  plum_fitting_type_Id Int
 }
 
 model plum_pipe_info {
-  id                        Int                @id @default(autoincrement())
-  plum_grade                plum_grade         @relation(fields: [plum_grade_id], references: [id])
-  plum_grade_id             Int
-  plum_size                 plum_size          @relation(fields: [plum_size_id], references: [id])
-  plum_size_id              Int
-  plum_pipe_end_type        plum_pipe_end_type @relation(fields: [plum_pipe_end_type_id], references: [id])
-  plum_pipe_end_type_id     Int
-  plum_pipe_price           plum_pipe_price[]
-  plum_type                 plum_type          @relation(fields: [plum_type_id], references: [id])
-  plum_type_id              Int
-  plum_pipe_length_metric   Decimal            @db.Decimal(10, 2)
-  plum_pipe_length_imperial Decimal            @db.Decimal(10, 2)
+  id                    Int                @id @default(autoincrement())
+  plum_grade            plum_grade         @relation(fields: [plum_grade_id], references: [id])
+  plum_grade_id         Int
+  plum_size             plum_size          @relation(fields: [plum_size_id], references: [id])
+  plum_size_id          Int
+  plum_pipe_end_type    plum_pipe_end_type @relation(fields: [plum_pipe_end_type_id], references: [id])
+  plum_pipe_end_type_id Int
+  plum_pipe_price       plum_pipe_price[]
+
+  plum_pipe_length_metric   Decimal        @db.Decimal(10, 2)
+  plum_pipe_length_imperial Decimal        @db.Decimal(10, 2)
+  plum_pipe_type            plum_pipe_type @relation(fields: [plum_pipe_type_Id], references: [id])
+  plum_pipe_type_Id         Int
 }
 
 model plum_price_version {
