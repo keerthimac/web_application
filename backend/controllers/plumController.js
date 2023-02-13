@@ -5,57 +5,6 @@ const { PrismaClient } = require("@prisma/client");
 
 const prisma = new PrismaClient();
 
-// @desc Get all pipe data
-// @route GET /api/plumbing/pipe
-// @access Private
-
-const getPipeData = asyncHandler(async (req, res) => {
-  //   res.status(200).json({ message: "Get all plumbing data" });
-
-  const main = async function () {
-    const allBrands = await prisma.plumPipeInfo.findMany({
-      select: {
-        id: true,
-        PlumGrade: {
-          select: {
-            plumGrade: true,
-            plumStandard: true,
-          },
-        },
-        PlumSize: {
-          select: {
-            plumSizeImperial: true,
-          },
-        },
-        PlumPipeEndType: {
-          select: {
-            plumPipeEndType: true,
-          },
-        },
-        PlumType: {
-          select: {
-            plumType: true,
-          },
-        },
-        plumPipeLengthImperial: true,
-        plumPipeLengthMetric: true,
-      },
-    });
-    // console.log(allBrands);
-    res.status(200).json(allBrands);
-  };
-
-  main()
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
-});
-
 // @desc Get all brands
 // @route GET /api/plumbing/fitting
 // @access Private
@@ -85,6 +34,8 @@ const getBrands = asyncHandler(async (req, res) => {
     });
 });
 
+//-------------------------------------- FITTING DATA ----------------------------------------------------------//
+
 // @desc Get all Plumbing types
 // @route GET /api/plumbing/fitting
 // @access Private
@@ -97,31 +48,6 @@ const getPlumFittingTypes = asyncHandler(async (req, res) => {
       select: {
         id: true,
         plum_fitting_type: true,
-      },
-    });
-    console.log(allBrands);
-    res.status(200).json(allBrands);
-  };
-
-  main()
-    .then(async () => {
-      await prisma.$disconnect();
-    })
-    .catch(async (e) => {
-      console.error(e);
-      await prisma.$disconnect();
-      process.exit(1);
-    });
-});
-
-const getPlumPipeTypes = asyncHandler(async (req, res) => {
-  //   res.status(200).json({ message: "Get all plumbing data" });
-
-  const main = async function () {
-    const allBrands = await prisma.plum_pipe_type.findMany({
-      select: {
-        id: true,
-        plum_pipe_type: true,
       },
     });
     console.log(allBrands);
@@ -252,6 +178,88 @@ const getFittingData = asyncHandler(async (req, res) => {
             plum_fitting_type: true,
           },
         },
+      },
+    });
+    // console.log(allBrands);
+    res.status(200).json(allBrands);
+  };
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+});
+
+//----------------------------------------------- PIPE DATA -----------------------------------------------------------------
+
+// @desc Get all pipe data
+// @route GET /api/plumbing/pipe
+// @access Private
+
+const getPlumPipeTypes = asyncHandler(async (req, res) => {
+  //   res.status(200).json({ message: "Get all plumbing data" });
+
+  const main = async function () {
+    const allBrands = await prisma.plum_pipe_type.findMany({
+      select: {
+        id: true,
+        plum_pipe_type: true,
+      },
+    });
+    console.log(allBrands);
+    res.status(200).json(allBrands);
+  };
+
+  main()
+    .then(async () => {
+      await prisma.$disconnect();
+    })
+    .catch(async (e) => {
+      console.error(e);
+      await prisma.$disconnect();
+      process.exit(1);
+    });
+});
+
+// @desc Get all pipe data
+// @route GET /api/plumbing/pipe
+// @access Private
+
+const getPipeData = asyncHandler(async (req, res) => {
+  //   res.status(200).json({ message: "Get all plumbing data" });
+
+  const main = async function () {
+    const allBrands = await prisma.plumPipeInfo.findMany({
+      select: {
+        id: true,
+        PlumGrade: {
+          select: {
+            plumGrade: true,
+            plumStandard: true,
+          },
+        },
+        PlumSize: {
+          select: {
+            plumSizeImperial: true,
+          },
+        },
+        PlumPipeEndType: {
+          select: {
+            plumPipeEndType: true,
+          },
+        },
+        PlumType: {
+          select: {
+            plumType: true,
+          },
+        },
+        plumPipeLengthImperial: true,
+        plumPipeLengthMetric: true,
       },
     });
     // console.log(allBrands);

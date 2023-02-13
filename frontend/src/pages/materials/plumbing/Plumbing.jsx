@@ -17,13 +17,13 @@ function Plumbing() {
     },
     {
       id: 3,
-      title: "Fitting Data",
+      title: "Compare Pipe Data",
       body: "Compare Current prices of fittings of each brands",
       link: "plumbing/fittingData",
     },
     {
       id: 4,
-      title: "Pipe Data",
+      title: "Compare Pipe Data",
       body: "Compare Current prices of Pipes of each brands",
       link: "plumbing/pipeData",
     },
