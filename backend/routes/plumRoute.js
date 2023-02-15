@@ -9,11 +9,17 @@ const {
   getPlumPipeTypes,
 } = require("../controllers/plumController");
 
-router.get("/pipe", getPipeData);
 router.get("/brands", getBrands);
+
+//--------------------------------PIPE ROUTES-----------------------------------------------------------//
+
+router.get("/pipe", getPipeData);
+router.get("/plum_pipe_type", getPlumPipeTypes);
+
+//--------------------------------FITTING ROUTES-------------------------------------------------------//
+
 router.get("/fitting/:plumTypeId", getFittingData);
 router.get("/plum_fitting_type", getPlumFittingTypes);
-router.get("/plum_pipe_type", getPlumPipeTypes);
 router.get("/fitting/:plumTypeId/:brandId", getFittingPriceData);
 
 module.exports = router;
