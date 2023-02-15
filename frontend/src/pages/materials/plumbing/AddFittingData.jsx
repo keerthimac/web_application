@@ -4,21 +4,21 @@ import PlumbingContext from "../../../context/materials/PlumbingContext";
 import FormInput from "../../../components/Inputs/FormInput";
 import { useParams } from "react-router-dom";
 import BackButton from "../../../components/Shared/BackButton";
+import Button from "../../../components/Shared/Button";
 
 export default function AddFittingData() {
   const [pressureFittingInfo, setPressureFittingInfo] = useState([]);
-  const [pressureFittingPrice, setPressureFittingPrice] = useState([
-    { revisionDate: null },
-  ]);
+  const [pressureFittingPrice, setPressureFittingPrice] = useState([]);
+  const [revisionDate, setRevisionDate] = useState("");
 
   const { fittingList, getFittingList } = useContext(PlumbingContext);
 
-  const { plumFittingTypeId } = useParams();
+  const { plumFittingTypeId, brandId } = useParams();
   console.log(plumFittingTypeId);
 
   useEffect(() => {
     setFittingList();
-  }, []);
+  }, [fittingList]);
 
   const setFittingList = () => {
     try {
@@ -35,7 +35,7 @@ export default function AddFittingData() {
           placeholder: `price`,
           label: `${obj.plum_fitting.plum_fitting} ${obj.plum_size.plum_size_metric}`,
           type: "number",
-          required: true,
+          // required: true,
           name: `${obj.plum_fitting.plum_fitting}_${obj.plum_size.plum_size_metric}`,
         };
       });
@@ -54,9 +54,15 @@ export default function AddFittingData() {
     setPressureFittingPrice(newPrices);
   };
 
-  const handleDate = (e) => {
-    const date = e.target.value;
-    setPressureFittingPrice([...pressureFittingPrice, { revisionDate: date }]);
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    const revisionData = {
+      revisionDate,
+      pressureFittingPrice,
+      brandId,
+    };
+    console.log(revisionData);
   };
 
   return (
@@ -67,23 +73,28 @@ export default function AddFittingData() {
       <div className='flex justify-start mb-1'>
         <BackButton />
       </div>
-      <div className='my-5'>
-        <label className='input-group input-group-vertical w-full max-w-xs'>
-          <span>Revision Date</span>
-          <input
-            onChange={(e) => handleDate(e)}
-            // value={}
-            type='date'
-            placeholder='info@site.com'
-            className='input input-bordered'
-          />
-        </label>
-      </div>
-      {/* <input
+      <form onSubmit={onSubmit}>
+        <div className='flex justify-between my-5'>
+          <label className='input-group input-group-vertical w-full max-w-xs'>
+            <span>Revision Date</span>
+            <input
+              onChange={(e) => setRevisionDate(e.target.value)}
+              name='revisionDate'
+              required
+              type='date'
+              placeholder='info@site.com'
+              className='input input-bordered'
+            />
+          </label>
+          <button className='mt-5 btn btn-outline btn-warning rounded-btn'>
+            Submit
+          </button>
+        </div>
+        {/* <input
         type='date'
         className='mt-5 input input-bordered w-full max-w-xs'
       /> */}
-      <form>
+
         <div className='max-h-screen outline outline-offset-8 outline-gray-600 overflow-y-scroll overflow-x-hidden mt-5 grid grid-cols-1 gap-x-8 gap-2 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2'>
           {pressureFittingInfo.map((data) => (
             <FormInput
