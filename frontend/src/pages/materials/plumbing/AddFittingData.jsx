@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useContext } from "react";
-import PlumbingContext from "../../../context/materials/PlumbingContext";
+import { useSelector, useDispatch } from "react-redux";
 import FormInput from "../../../components/Inputs/FormInput";
 import { useParams } from "react-router-dom";
 import BackButton from "../../../components/Shared/BackButton";
@@ -11,10 +11,11 @@ export default function AddFittingData() {
   const [pressureFittingPrice, setPressureFittingPrice] = useState([]);
   const [revisionDate, setRevisionDate] = useState("");
 
-  const { fittingList, getFittingList } = useContext(PlumbingContext);
+  const { isError, isLoading, isSuccess, message, fittingList } = useSelector(
+    (state) => state.plumbing
+  );
 
-  const { plumFittingTypeId, brandId } = useParams();
-  console.log(plumFittingTypeId);
+  const { brandId } = useParams();
 
   useEffect(() => {
     setFittingList();

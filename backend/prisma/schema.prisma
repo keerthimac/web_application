@@ -76,6 +76,7 @@ model plum_fitting {
 model brand {
   id                 Int                   @id @default(autoincrement())
   brand              String
+  image_url          String?
   plum_fitting_price plum_fitting_price[]
   plum_pipe_price    plum_pipe_price[]
   material           brands_on_materials[]
@@ -123,12 +124,14 @@ model plum_size {
 model plum_pipe_type {
   id             Int              @id @default(autoincrement())
   plum_pipe_type String
+  image_url      String?
   plum_pipe_info plum_pipe_info[]
 }
 
 model plum_fitting_type {
   id                Int                 @id @default(autoincrement())
   plum_fitting_type String
+  image_url         String?
   plum_fitting_info plum_fitting_info[]
 }
 

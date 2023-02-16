@@ -1,3 +1,4 @@
+import axios from "axios";
 import { createContext, useState, useReducer } from "react";
 import plumbingReducer from "./PlumbingReducer";
 
@@ -42,13 +43,15 @@ export const PlumbingProvider = ({ children }) => {
 
   const getFittingList = async (fittingTypeId) => {
     try {
-      const response = await fetch(`/api/plumbing/fitting/${fittingTypeId}`);
-      const data = await response.json();
+      const response = await axios.get(
+        `/api/plumbing/fitting/${fittingTypeId}`
+      );
+      // const data = await response.json();
 
-      console.log(data);
+      console.log(response);
       dispatch({
         type: "SET_FITTING_DATA",
-        payload: data,
+        payload: response.data,
       });
     } catch (err) {
       console.log(err.message);

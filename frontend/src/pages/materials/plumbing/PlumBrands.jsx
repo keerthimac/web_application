@@ -1,44 +1,36 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+
+import { useSelector, useDispatch } from "react-redux";
+import { getBrandList } from "../../../features/materials/plumbing/plumbingSlice";
+import { reset } from "../../../features/materials/plumbing/plumbingSlice";
+
 import CardImageBack from "../../../components/Shared/CardImageBack";
-import slon from "../../../images/plumbing/slon.jpg";
-import anton from "../../../images/plumbing/Anton.jpg";
-import national from "../../../images/plumbing/national.jpg";
 import BackButton from "../../../components/Shared/BackButton";
 
 function PlumBrands() {
-  const [brands, setBrands] = useState([]);
+  const { isError, isLoading, isSuccess, message, brands } = useSelector(
+    (state) => state.plumbing
+  );
 
-  const getBrandList = async () => {
-    try {
-      const response = await fetch(`/api/plumbing/brands`);
-      const data = await response.json();
-
-      // setPlumbingData(data);
-      const newArr = data.map((obj) => {
-        return {
-          id: obj.id,
-          title: obj.brand,
-          body: `View the what Elements ${obj.brand} Brand offers and see current prices`,
-          buttons: [{ id: 1, value: "Go", link: `plumbing/brands/${obj.id}` }],
-          src:
-            obj.brand == "Slon"
-              ? slon
-              : obj.brand == "Anton"
-              ? anton
-              : obj.brand == "National"
-              ? national
-              : "",
-        };
-      });
-      setBrands(newArr);
-    } catch (err) {
-      console.error(err.message);
-    }
-  };
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    getBrandList();
-  }, []);
+    toast.promise(dispatch(getBrandList()), {
+      pending: "Loading",
+      // success: "data Fetched successfully",
+      error: message,
+    });
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [dispatch, isSuccess, isError]);
 
   return (
     <div>

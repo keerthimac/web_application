@@ -17,6 +17,7 @@ const getBrands = asyncHandler(async (req, res) => {
       select: {
         id: true,
         brand: true,
+        image_url: true,
       },
     });
     console.log(allBrands);
@@ -48,6 +49,7 @@ const getPlumFittingTypes = asyncHandler(async (req, res) => {
       select: {
         id: true,
         plum_fitting_type: true,
+        image_url: true,
       },
     });
     console.log(allBrands);
@@ -209,6 +211,7 @@ const getPlumPipeTypes = asyncHandler(async (req, res) => {
       select: {
         id: true,
         plum_pipe_type: true,
+        image_url: true,
       },
     });
     console.log(allBrands);

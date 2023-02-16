@@ -1,5 +1,12 @@
 import React from "react";
-import { useEffect, useContext } from "react";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getFittingList,
+  getFittingPriceList,
+} from "../../../features/materials/plumbing/plumbingSlice";
+import { reset } from "../../../features/materials/plumbing/plumbingSlice";
 import PlumbingContext from "../../../context/materials/PlumbingContext";
 import TableComponent from "../../../components/BasicTable/TableComponent";
 import { Link, useParams } from "react-router-dom";
@@ -7,12 +14,12 @@ import BackButton from "../../../components/Shared/BackButton";
 import Button from "../../../components/Shared/Button";
 
 function FittingData() {
-  const { fittingPriceList, getFittingPriceList, getFittingList } =
-    useContext(PlumbingContext);
-
   const { plumFittingTypeId, brandId } = useParams();
-  const test = useParams();
-  console.log(test);
+
+  const { isError, isLoading, isSuccess, message, fittingPriceList } =
+    useSelector((state) => state.plumbing);
+
+  const dispatch = useDispatch();
 
   const FITTING_COLUMNS = [
     {
@@ -61,9 +68,36 @@ function FittingData() {
   ];
 
   useEffect(() => {
-    getFittingPriceList(plumFittingTypeId, brandId);
-    getFittingList(plumFittingTypeId);
-  }, []);
+    if (isError) {
+      toast.error(message);
+    }
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [dispatch, isSuccess, isError]);
+
+  useEffect(() => {
+    toast.promise(
+      dispatch(
+        getFittingPriceList({
+          fittingTypeId: plumFittingTypeId,
+          brandId: brandId,
+        })
+      ),
+      {
+        pending: "Loading",
+        // success: "data Fetched successfully",
+        // error: "Data Fetching Failed",
+      }
+    );
+    dispatch(
+      getFittingPriceList({
+        fittingTypeId: plumFittingTypeId,
+        brandId: brandId,
+      })
+    );
+    dispatch(getFittingList(plumFittingTypeId));
+  }, [dispatch, plumFittingTypeId, brandId]);
 
   return (
     <div className='h-screen mt-5'>

@@ -8,6 +8,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
+      "/images": serverIp,
       "/api/plumbing/fitting": serverIp,
       "/api/plumbing/brand": serverIp,
       "/api/plumbing/plum_fitting_type": serverIp,
