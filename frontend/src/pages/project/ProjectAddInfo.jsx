@@ -1,4 +1,3 @@
-import { Form, Button, Container } from "react-bootstrap";
 import { useState } from "react";
 import FormInput from "../../components/Inputs/FormInput";
 import LocationComponent from "../../components/LocationComponent";
@@ -57,9 +56,9 @@ function ProjectAddInfo() {
   };
 
   return (
-    <Container>
-      <Form>
-        <Form.Group className='mb-3 mt-3'>
+    <div>
+      <form>
+        <div className='mb-3 mt-3'>
           {clientForm.map((data) => (
             <FormInput
               key={data.id}
@@ -68,14 +67,14 @@ function ProjectAddInfo() {
               onChange={onChange}
             />
           ))}
-        </Form.Group>
+        </div>
         <LocationComponent
           onChange={onChange}
           state={projectInfo}
           setState={setProjectInfo}
         />
-      </Form>
-    </Container>
+      </form>
+    </div>
   );
 }
 

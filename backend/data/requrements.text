@@ -1,3 +1,21 @@
+Plumbing requirements
+2022.02.13
+
+-Create method prepare for Prices & This is important for the following reasons:
+  -Historical data analysis
+  -Ability to compare prices
+When this is complected one of the  main functionally will be completed
+
+-Have to create image upload functionality with express and multer
+  for current items, have to create put request in order to update image
+-New items have to be created with image upload functionality
+
+
+
+
+
+
+
 sub contract requirements
 
 CREATE

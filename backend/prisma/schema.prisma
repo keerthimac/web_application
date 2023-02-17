@@ -10,166 +10,191 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model SubCompany {
-  subCompanyId   Int           @id @default(autoincrement())
-  subCompanyName String
-  subContracts   SubContract[]
+model sub_company {
+  sub_company_id   Int            @id @default(autoincrement())
+  sub_company_name String
+  sub_contracts    sub_contract[]
 }
 
-model Project {
-  projectId    Int                @id @default(autoincrement())
-  projectName  String
-  clientName   String
-  subContracts SubContract[]
-  projectStage StagesOnProjects[]
+model project {
+  project_id    Int                  @id @default(autoincrement())
+  project_name  String
+  client_name   String
+  sub_contracts sub_contract[]
+  project_stage stages_on_projects[]
 }
 
-model ProjectStage {
-  projectStageId Int                @id @default(autoincrement())
-  projectStage   String
-  subContracts   SubContract[]
-  projects       StagesOnProjects[]
+model project_stage {
+  project_stage_id Int                  @id @default(autoincrement())
+  project_stage    String
+  sub_contracts    sub_contract[]
+  projects         stages_on_projects[]
 }
 
 // one to meny relationship on subcontract & sub company
 // one to meny relationship on subcontract & projects
 // one to meny relationship on subcontract & stages
-model SubContract {
-  subContractId   Int                   @id @default(autoincrement())
-  subCompany      SubCompany            @relation(fields: [subCompanyId], references: [subCompanyId])
-  subCompanyId    Int
-  Project         Project               @relation(fields: [projectId], references: [projectId])
-  projectId       Int
-  ProjectStage    ProjectStage          @relation(fields: [projectStageId], references: [projectStageId])
-  projectStageId  Int
-  subContractName String
-  startDate       DateTime?
-  finishDate      DateTime?
-  subPayments     SubContractPayments[]
+model sub_contract {
+  sub_contract_id   Int                     @id @default(autoincrement())
+  sub_company       sub_company             @relation(fields: [sub_company_id], references: [sub_company_id])
+  sub_company_id    Int
+  project           project                 @relation(fields: [project_id], references: [project_id])
+  project_id        Int
+  project_stage     project_stage           @relation(fields: [project_stage_id], references: [project_stage_id])
+  project_stage_id  Int
+  sub_contract_name String
+  start_date        DateTime?
+  finish_date       DateTime?
+  sub_payments      sub_contract_payments[]
 }
 
-model SubContractPayments {
-  subPaymentId  Int         @id @default(autoincrement())
-  SubContract   SubContract @relation(fields: [subContractId], references: [subContractId])
-  subContractId Int
+model sub_contract_payments {
+  sub_payment_id  Int          @id @default(autoincrement())
+  sub_contract    sub_contract @relation(fields: [sub_contract_id], references: [sub_contract_id])
+  sub_contract_id Int
 }
 
 //Meny to Meny with Projects & Stages with value
-model StagesOnProjects {
-  Project        Project      @relation(fields: [projectId], references: [projectId])
-  projectId      Int
-  ProjectStage   ProjectStage @relation(fields: [projectStageId], references: [projectStageId])
-  projectStageId Int
-  value          Decimal      @db.Decimal(10, 2)
+model stages_on_projects {
+  project          project       @relation(fields: [project_id], references: [project_id])
+  project_id       Int
+  project_stage    project_stage @relation(fields: [project_stage_id], references: [project_stage_id])
+  project_stage_id Int
+  value            Decimal       @db.Decimal(10, 2)
 
-  @@id([projectId, projectStageId])
+  @@id([project_id, project_stage_id])
 }
 
 //Plumbing Models
 
-model PlumFitting {
-  id              Int               @id @default(autoincrement())
-  plumFitting     String
-  PlumFittingInfo PlumFittingInfo[]
+model plum_fitting {
+  id                Int                 @id @default(autoincrement())
+  plum_fitting      String
+  plum_fitting_info plum_fitting_info[]
 }
 
-model PlumBrand {
-  id               Int                @id @default(autoincrement())
-  plumBrand        String
-  PlumFittingPrice PlumFittingPrice[]
-  PlumPipePrice    PlumPipePrice[]
+model brand {
+  id                 Int                   @id @default(autoincrement())
+  brand              String
+  image_url          String?
+  plum_fitting_price plum_fitting_price[]
+  plum_pipe_price    plum_pipe_price[]
+  material           brands_on_materials[]
 }
 
-model PlumStandard {
-  id              Int         @id @default(autoincrement())
-  plumStandard    String
-  plumDescription String
-  PlumGrade       PlumGrade[]
+model material {
+  id       Int                   @id @default(autoincrement())
+  material String
+  brands   brands_on_materials[]
 }
 
-model PlumGrade {
-  id              Int               @id @default(autoincrement())
-  plumGrade       String
-  PlumStandard    PlumStandard      @relation(fields: [plumStandardId], references: [id])
-  plumStandardId  Int
-  PlumFittingInfo PlumFittingInfo[]
-  PlumPipeInfo    PlumPipeInfo[]
+model brands_on_materials {
+  brand       brand    @relation(fields: [brand_id], references: [id])
+  brand_id    Int
+  material    material @relation(fields: [material_id], references: [id])
+  material_id Int
+
+  @@id([brand_id, material_id])
 }
 
-model PlumSize {
-  id               Int               @id @default(autoincrement())
-  plumSizeMetric   String
-  plumSizeImperial String
-  PlumFittingInfo  PlumFittingInfo[]
-  PlumPipeInfo     PlumPipeInfo[]
+model plum_standard {
+  id               Int          @id @default(autoincrement())
+  plum_standard    String
+  plum_description String
+  plum_grade       plum_grade[]
 }
 
-model PlumType {
-  id              Int               @id @default(autoincrement())
-  plumType        String
-  PlumFittingInfo PlumFittingInfo[]
-  PlumPipeInfo    PlumPipeInfo[]
+model plum_grade {
+  id                Int                 @id @default(autoincrement())
+  plum_grade        String
+  plum_standard     plum_standard       @relation(fields: [plum_standard_id], references: [id])
+  plum_standard_id  Int
+  plum_fitting_info plum_fitting_info[]
+  plum_pipe_info    plum_pipe_info[]
 }
 
-model PlumPipeEndType {
-  id              Int            @id @default(autoincrement())
-  plumPipeEndType String
-  PlumPipeInfo    PlumPipeInfo[]
+model plum_size {
+  id                 Int                 @id @default(autoincrement())
+  plum_size_metric   String
+  plum_size_imperial String
+  plum_fitting_info  plum_fitting_info[]
+  plum_pipe_info     plum_pipe_info[]
 }
 
-model PlumFittingInfo {
-  id               Int                @id @default(autoincrement())
-  PlumFitting      PlumFitting        @relation(fields: [plumFittingId], references: [id])
-  plumFittingId    Int
-  PlumGrade        PlumGrade          @relation(fields: [plumGradeId], references: [id])
-  plumGradeId      Int
-  PlumSize         PlumSize           @relation(fields: [plumSizeId], references: [id])
-  plumSizeId       Int
-  PlumFittingPrice PlumFittingPrice[]
-  PlumType         PlumType           @relation(fields: [plumTypeId], references: [id])
-  plumTypeId       Int
+model plum_pipe_type {
+  id             Int              @id @default(autoincrement())
+  plum_pipe_type String
+  image_url      String?
+  plum_pipe_info plum_pipe_info[]
 }
 
-model PlumPipeInfo {
-  id                     Int             @id @default(autoincrement())
-  PlumGrade              PlumGrade       @relation(fields: [plumGradeId], references: [id])
-  plumGradeId            Int
-  PlumSize               PlumSize        @relation(fields: [plumSizeId], references: [id])
-  plumSizeId             Int
-  PlumPipeEndType        PlumPipeEndType @relation(fields: [plumPipeEndTypeId], references: [id])
-  plumPipeEndTypeId      Int
-  PlumPipePrice          PlumPipePrice[]
-  PlumType               PlumType        @relation(fields: [plumTypeId], references: [id])
-  plumTypeId             Int
-  plumPipeLengthMetric   Decimal         @db.Decimal(10, 2)
-  plumPipeLengthImperial Decimal         @db.Decimal(10, 2)
+model plum_fitting_type {
+  id                Int                 @id @default(autoincrement())
+  plum_fitting_type String
+  image_url         String?
+  plum_fitting_info plum_fitting_info[]
 }
 
-model PlumPriceVersion {
-  id                Int                @id @default(autoincrement())
-  plumPriceVersion  String
-  PlumFittingPrices PlumFittingPrice[]
-  PlumPipePrices    PlumPipePrice[]
-}
-
-model PlumFittingPrice {
+model plum_pipe_end_type {
   id                 Int              @id @default(autoincrement())
-  plumFittingPrice   Decimal          @db.Decimal(10, 2)
-  PlumPriceVersion   PlumPriceVersion @relation(fields: [plumPriceVersionId], references: [id])
-  plumPriceVersionId Int
-  PlumFittingInfo    PlumFittingInfo  @relation(fields: [plumFittingInfoId], references: [id])
-  plumFittingInfoId  Int
-  PlumBrand          PlumBrand        @relation(fields: [plumBrandId], references: [id])
-  plumBrandId        Int
+  plum_pipe_end_type String
+  plum_pipe_info     plum_pipe_info[]
 }
 
-model PlumPipePrice {
-  id                 Int              @id @default(autoincrement())
-  plumPipePrices     Decimal          @db.Decimal(10, 2)
-  PlumPriceVersion   PlumPriceVersion @relation(fields: [plumPriceVersionId], references: [id])
-  plumPriceVersionId Int
-  PlumPipeInfo       PlumPipeInfo     @relation(fields: [plumPipeInfoId], references: [id])
-  plumPipeInfoId     Int
-  PlumBrand          PlumBrand        @relation(fields: [plumBrandId], references: [id])
-  plumBrandId        Int
+model plum_fitting_info {
+  id                   Int                  @id @default(autoincrement())
+  plum_fitting         plum_fitting         @relation(fields: [plum_fitting_id], references: [id])
+  plum_fitting_id      Int
+  plum_grade           plum_grade           @relation(fields: [plum_grade_id], references: [id])
+  plum_grade_id        Int
+  plum_size            plum_size            @relation(fields: [plum_size_id], references: [id])
+  plum_size_id         Int
+  plum_fitting_price   plum_fitting_price[]
+  plum_fitting_type    plum_fitting_type    @relation(fields: [plum_fitting_type_Id], references: [id])
+  plum_fitting_type_Id Int
+}
+
+model plum_pipe_info {
+  id                    Int                @id @default(autoincrement())
+  plum_grade            plum_grade         @relation(fields: [plum_grade_id], references: [id])
+  plum_grade_id         Int
+  plum_size             plum_size          @relation(fields: [plum_size_id], references: [id])
+  plum_size_id          Int
+  plum_pipe_end_type    plum_pipe_end_type @relation(fields: [plum_pipe_end_type_id], references: [id])
+  plum_pipe_end_type_id Int
+  plum_pipe_price       plum_pipe_price[]
+
+  plum_pipe_length_metric   Decimal        @db.Decimal(10, 2)
+  plum_pipe_length_imperial Decimal        @db.Decimal(10, 2)
+  plum_pipe_type            plum_pipe_type @relation(fields: [plum_pipe_type_Id], references: [id])
+  plum_pipe_type_Id         Int
+}
+
+model plum_price_version {
+  id                 Int                  @id @default(autoincrement())
+  plum_price_version String
+  Plum_fitting_price plum_fitting_price[]
+  PlumPipePrice      plum_pipe_price[]
+}
+
+model plum_fitting_price {
+  id                    Int                @id @default(autoincrement())
+  plum_fitting_price    Decimal            @db.Decimal(10, 2)
+  plum_price_version    plum_price_version @relation(fields: [plum_price_version_id], references: [id])
+  plum_price_version_id Int
+  plum_fitting_info     plum_fitting_info  @relation(fields: [plum_fitting_info_id], references: [id])
+  plum_fitting_info_id  Int
+  brand                 brand              @relation(fields: [brand_id], references: [id])
+  brand_id              Int
+}
+
+model plum_pipe_price {
+  id                    Int                @id @default(autoincrement())
+  plum_pipe_price       Decimal            @db.Decimal(10, 2)
+  plum_price_version    plum_price_version @relation(fields: [plum_price_version_id], references: [id])
+  plum_price_version_id Int
+  plum_pipe_info        plum_pipe_info     @relation(fields: [plum_pipe_info_id], references: [id])
+  plum_pipe_info_id     Int
+  brand                 brand              @relation(fields: [brand_id], references: [id])
+  brand_id              Int
 }
