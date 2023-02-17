@@ -4,7 +4,6 @@ const colors = require("colors");
 const dotenv = require("dotenv").config();
 const PORT = process.env.PORT || 5000;
 const multer = require("multer");
-const path = require("path");
 const errorHandler = require("./middleware/errorMiddleware");
 const cors = require("cors");
 
