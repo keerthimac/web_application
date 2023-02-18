@@ -1,11 +1,11 @@
 USE web_server;
 
 INSERT INTO
-    brand (brand)
+    brand (brand, image_url)
 VALUES
-    ("Slon"),
-    ("Anton"),
-    ("National");
+    ("Slon", "/images/image-1676562593978.jpg"),
+    ("Anton", "/images/image-1676563753249.jpg"),
+    ("National", "/images/image-1676563774462.jpg");
 
 INSERT INTO
     plum_fitting (plum_fitting)
@@ -162,19 +162,37 @@ VALUES
     ("160mm", "6\"");
 
 INSERT INTO
-    plum_fitting_type (plum_fitting_type)
+    plum_fitting_type (plum_fitting_type, image_url)
 VALUES
-    ("Pressure Fittings"),
-    ("Drainage Fittings"),
-    ("Sewerage Fittings"),
-    ("Cpvc Fittings");
+    (
+        "Pressure Fittings",
+        "/images/image-1676565211682.jpg"
+    ),
+    (
+        "Drainage Fittings",
+        "/images/image-1676565728489.jpg"
+    ),
+    (
+        "Sewerage Fittings",
+        "/images/image-1676565768204.jpg"
+    ),
+    (
+        "Cpvc Fittings",
+        "/images/image-1676565815333.jpg"
+    );
 
 INSERT INTO
-    plum_pipe_type (plum_pipe_type)
+    plum_pipe_type (plum_pipe_type, image_url)
 VALUES
-    ("Pressure pipes"),
-    ("Drainage Pipes"),
-    ("Cpvc Pipes");
+    (
+        "Pressure pipes",
+        "/images/image-1676566713099.jpg"
+    ),
+    (
+        "Drainage Pipes",
+        "/images/image-1676566758562.jpg"
+    ),
+    ("Cpvc Pipes", "/images/image-1676566782947.jpg");
 
 INSERT INTO
     plum_fitting_info (
