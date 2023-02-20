@@ -11,38 +11,43 @@ export default function AddFittingData() {
   const [pressureFittingPrice, setPressureFittingPrice] = useState([]);
   const [revisionDate, setRevisionDate] = useState("");
 
-  const { isError, isLoading, isSuccess, message, fittingList } = useSelector(
-    (state) => state.plumbing
-  );
+  const {
+    isError,
+    isLoading,
+    isSuccess,
+    message,
+    fittingList,
+    fittingPriceList,
+  } = useSelector((state) => state.plumbing);
 
   const { brandId } = useParams();
 
   useEffect(() => {
     setFittingList();
-  }, [fittingList]);
+  }, [fittingPriceList]);
 
   const setFittingList = () => {
     try {
-      const priceArr = fittingList.map((price) => {
+      const priceArr = fittingPriceList.map((price) => {
         return {
-          id: price.id,
+          id: price.plum_fitting_info.id,
           fittingPrice: "",
         };
       });
 
-      const inputArr = fittingList.map((obj) => {
+      const inputArr = fittingPriceList.map((obj) => {
         return {
           id: obj.id,
           placeholder: `price`,
-          label: `${obj.plum_fitting.plum_fitting} ${obj.plum_size.plum_size_metric}`,
+          label: `${obj.plum_fitting_info.plum_fitting.plum_fitting} ${obj.plum_fitting_info.plum_size.plum_size_metric}`,
           type: "number",
           // required: true,
-          name: `${obj.plum_fitting.plum_fitting}_${obj.plum_size.plum_size_metric}`,
+          name: `${obj.plum_fitting_info.plum_fitting.plum_fitting}_${obj.plum_fitting_info.plum_size.plum_size_metric}`,
         };
       });
       setPressureFittingInfo(inputArr);
       setPressureFittingPrice(priceArr);
-      console.log(priceArr);
+      // console.log(priceArr);
     } catch (err) {
       console.error(err.message);
     }

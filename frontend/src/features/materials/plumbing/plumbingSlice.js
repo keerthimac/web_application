@@ -32,7 +32,7 @@ export const getBrandList = createAsyncThunk(
   }
 );
 
-//Get Brand List
+//Get Brand Elements List
 export const getBrandElementList = createAsyncThunk(
   "plumbing/getBrandEleList",
   async ({ plumType, brandId }, thunkAPI) => {

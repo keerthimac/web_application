@@ -70,6 +70,7 @@ model stages_on_projects {
 model plum_fitting {
   id                Int                 @id @default(autoincrement())
   plum_fitting      String
+  image_url         String?
   plum_fitting_info plum_fitting_info[]
 }
 

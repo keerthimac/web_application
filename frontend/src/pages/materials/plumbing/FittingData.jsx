@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,16 +8,39 @@ import {
 } from "../../../features/materials/plumbing/plumbingSlice";
 import { reset } from "../../../features/materials/plumbing/plumbingSlice";
 import PlumbingContext from "../../../context/materials/PlumbingContext";
-import TableComponent from "../../../components/BasicTable/TableComponent";
+import Table from "../../../components/BasicTable/Table";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../../../components/Shared/BackButton";
 import Button from "../../../components/Shared/Button";
+import CardButton from "../../../components/Shared/CardButton";
 
 function FittingData() {
   const { plumFittingTypeId, brandId } = useParams();
 
   const { isError, isLoading, isSuccess, message, fittingPriceList } =
     useSelector((state) => state.plumbing);
+
+  const [filtered, setFiltered] = useState([]);
+
+  const filteredList = (fittingPriceList) => {
+    const fittingList = fittingPriceList.map((item) => {
+      return {
+        id: item.id,
+        name: item.plum_fitting_info.plum_fitting.plum_fitting,
+        image_url: item.plum_fitting_info.plum_fitting.image_url,
+      };
+    });
+    setFiltered(fittingList);
+    console.log(fittingList);
+  };
+
+  const test = [
+    {
+      id: 1,
+      image_url: "/images/image-1676856319455.jpg",
+      name: "Socket",
+    },
+  ];
 
   const dispatch = useDispatch();
 
@@ -72,6 +95,7 @@ function FittingData() {
       toast.error(message);
     }
     if (isSuccess) {
+      filteredList(fittingPriceList);
       dispatch(reset());
     }
   }, [dispatch, isSuccess, isError]);
@@ -90,28 +114,24 @@ function FittingData() {
         // error: "Data Fetching Failed",
       }
     );
-    dispatch(
-      getFittingPriceList({
-        fittingTypeId: plumFittingTypeId,
-        brandId: brandId,
-      })
-    );
-    dispatch(getFittingList(plumFittingTypeId));
   }, [dispatch, plumFittingTypeId, brandId]);
 
   return (
-    <div className='h-screen mt-5'>
-      <div className='flex justify-between mb-10'>
+    <div className='h-screen '>
+      <div className='flex justify-between mb-2 max-w-full'>
         <BackButton />
+        <div className='flex flex-wrap justify-center gap-x-5'>
+          {filtered.map((item) => {
+            return <CardButton label={item.name} image_url={item.image_url} />;
+          })}
+        </div>
         <Button
           content={"Add Price"}
           link={`/plumbing/brands/${brandId}/fittingData/${plumFittingTypeId}/addData`}
         />
       </div>
-      <TableComponent
-        TableColumns={FITTING_COLUMNS}
-        parentState={fittingPriceList}
-      />
+
+      <Table TableColumns={FITTING_COLUMNS} parentState={fittingPriceList} />
     </div>
   );
 }

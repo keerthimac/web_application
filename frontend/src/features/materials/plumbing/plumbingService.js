@@ -11,6 +11,7 @@ const getFittingPriceList = async (fittingTypeId, brandId) => {
     `/api/plumbing/fitting/${fittingTypeId}/${brandId}`
   );
   const data = await response.data;
+  console.log(data);
   return data;
 };
 
