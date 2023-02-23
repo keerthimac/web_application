@@ -130,7 +130,7 @@ function FittingData() {
     <div className='h-screen '>
       <div className='flex justify-between mb-2 max-w-full'>
         <BackButton />
-        <div className='flex flex-wrap justify-center gap-x-5'>
+        <div className='flex flex-wrap justify-center gap-3'>
           {filtered.map((item) => {
             return (
               <CardButton
