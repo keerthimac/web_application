@@ -8,7 +8,7 @@ import {
 } from "../../../features/materials/plumbing/plumbingSlice";
 import { reset } from "../../../features/materials/plumbing/plumbingSlice";
 import PlumbingContext from "../../../context/materials/PlumbingContext";
-import Table from "../../../components/BasicTable/Table";
+import TableV2 from "../../../components/BasicTable/TableV2";
 import { Link, useParams } from "react-router-dom";
 import BackButton from "../../../components/Shared/BackButton";
 import Button from "../../../components/Shared/Button";
@@ -21,30 +21,39 @@ function FittingData() {
     useSelector((state) => state.plumbing);
 
   const [filtered, setFiltered] = useState([]);
+  const [buttonState, setButtonState] = useState([]);
 
   const filteredList = (fittingPriceList) => {
-    const fittingList = fittingPriceList.map((item) => {
+    const dupFilList = fittingPriceList.filter(
+      (obj, index, self) =>
+        index ===
+        self.findIndex(
+          (item) =>
+            item.plum_fitting_info.plum_fitting.plum_fitting ===
+            obj.plum_fitting_info.plum_fitting.plum_fitting
+        )
+    );
+    const fittingList = dupFilList.map((item) => {
       return {
         id: item.id,
+        socketId: item.plum_fitting_info.plum_fitting.id,
         name: item.plum_fitting_info.plum_fitting.plum_fitting,
         image_url: item.plum_fitting_info.plum_fitting.image_url,
       };
     });
     setFiltered(fittingList);
-    console.log(fittingList);
   };
-
-  const test = [
-    {
-      id: 1,
-      image_url: "/images/image-1676856319455.jpg",
-      name: "Socket",
-    },
-  ];
 
   const dispatch = useDispatch();
 
   const FITTING_COLUMNS = [
+    {
+      Header: "fittingID",
+      Footer: "FittingId",
+      accessor: "plum_fitting_info.plum_fitting.id",
+      show: false,
+      filter: "equals",
+    },
     {
       Header: "Id",
       Footer: "Id",
@@ -90,6 +99,11 @@ function FittingData() {
     },
   ];
 
+  function handleClick(event) {
+    // Access the button element and its properties using the event object
+    setButtonState(parseInt(event.currentTarget.title, 10));
+  }
+
   useEffect(() => {
     if (isError) {
       toast.error(message);
@@ -122,7 +136,15 @@ function FittingData() {
         <BackButton />
         <div className='flex flex-wrap justify-center gap-x-5'>
           {filtered.map((item) => {
-            return <CardButton label={item.name} image_url={item.image_url} />;
+            return (
+              <CardButton
+                key={item.id}
+                label={item.name}
+                image_url={item.image_url}
+                handleClick={handleClick}
+                id={item.socketId}
+              />
+            );
           })}
         </div>
         <Button
@@ -131,7 +153,11 @@ function FittingData() {
         />
       </div>
 
-      <Table TableColumns={FITTING_COLUMNS} parentState={fittingPriceList} />
+      <TableV2
+        TableColumns={FITTING_COLUMNS}
+        parentState={fittingPriceList}
+        filterState={buttonState}
+      />
     </div>
   );
 }

@@ -105,6 +105,7 @@ const getFittingPriceData = asyncHandler(async (req, res) => {
             id: true,
             plum_fitting: {
               select: {
+                id: true,
                 plum_fitting: true,
                 image_url: true,
               },
@@ -143,7 +144,7 @@ const getFittingPriceData = asyncHandler(async (req, res) => {
     });
 });
 
-// @desc Get all fitting pressure fittings
+// @desc Get all fittings
 // @route GET /api/plumbing/fitting
 // @access Private
 
@@ -165,21 +166,6 @@ const getFittingData = asyncHandler(async (req, res) => {
           select: {
             plum_fitting: true,
             image_url: true,
-          },
-        },
-        plum_grade: {
-          select: {
-            plum_grade: true,
-          },
-        },
-        plum_size: {
-          select: {
-            plum_size_metric: true,
-          },
-        },
-        plum_fitting_type: {
-          select: {
-            plum_fitting_type: true,
           },
         },
       },
