@@ -4,7 +4,7 @@ import {
   useSortBy,
   useGlobalFilter,
   useFilters,
-  allColumns,
+  usePagination,
 } from "react-table";
 import GlobalFilter from "./GlobalFilter";
 // import "./table.css";
@@ -12,16 +12,22 @@ import GlobalFilter from "./GlobalFilter";
 function TableV2({ TableColumns, parentState, filterState }) {
   const columns = useMemo(() => TableColumns, []);
   const data = useMemo(() => parentState, [parentState]);
-  const [filterValue, setFilterValue] = useState("");
 
   const {
     getTableProps,
     getTableBodyProps,
+    prepareRow,
     headerGroups,
     footerGroups,
-    rows,
-    prepareRow,
-    state,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    gotoPage,
+    nextPage,
+    previousPage,
+    state: { pageIndex },
     // setGlobalFilter,
     setFilter,
   } = useTable(
@@ -37,7 +43,8 @@ function TableV2({ TableColumns, parentState, filterState }) {
 
     // useGlobalFilter,
     useFilters,
-    useSortBy
+    useSortBy,
+    usePagination
   );
 
   // const { globalFilter } = state;
@@ -49,12 +56,7 @@ function TableV2({ TableColumns, parentState, filterState }) {
   return (
     <>
       {/* <GlobalFilter filter={globalFilter} setFilter={setGlobalFilter} /> */}
-      <input
-        value={filterValue || ""}
-        onChange={(e) => setFilterValue(e.target.value)}
-        placeholder='Filter by column'
-      />
-      <div className='overflow-x-auto overflow-y-scroll h-screen'>
+      <div className='overflow-x-auto overflow-y-hidden '>
         <table className='table table-zebra w-full' {...getTableProps()}>
           <thead>
             {headerGroups.map((headerGroup) => (
@@ -75,10 +77,10 @@ function TableV2({ TableColumns, parentState, filterState }) {
             ))}
           </thead>
           <tbody {...getTableBodyProps()}>
-            {rows.map((row) => {
+            {page.map((row, i) => {
               prepareRow(row);
               return (
-                <tr {...row.getRowProps()}>
+                <tr className='hover' {...row.getRowProps()}>
                   {row.cells.map((cell) => {
                     return (
                       <td {...cell.getCellProps()}>{cell.render("Cell")}</td>
@@ -88,18 +90,38 @@ function TableV2({ TableColumns, parentState, filterState }) {
               );
             })}
           </tbody>
-          <tfoot>
-            {footerGroups.map((footerGroup) => (
-              <tr {...footerGroup.getFooterGroupProps()}>
-                {footerGroup.headers.map((column) => (
-                  <td {...column.getFooterProps()}>
-                    {column.render("Footer")}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tfoot>
         </table>
+        <div className='flex flex-row justify-center p-5'>
+          <div className='btn-group'>
+            <button
+              className='btn'
+              onClick={() => gotoPage(0)}
+              disabled={!canPreviousPage}>
+              {"<<"}
+            </button>
+            <button
+              className='btn'
+              onClick={() => previousPage()}
+              disabled={!canPreviousPage}>
+              {"<"}
+            </button>
+            <button className='btn'>
+              Page {pageIndex + 1} of {pageOptions.length}
+            </button>
+            <button
+              className='btn'
+              onClick={() => nextPage()}
+              disabled={!canNextPage}>
+              {">"}
+            </button>
+            <button
+              className='btn'
+              onClick={() => gotoPage(pageCount - 1)}
+              disabled={!canNextPage}>
+              {">>"}
+            </button>
+          </div>
+        </div>
       </div>
     </>
   );

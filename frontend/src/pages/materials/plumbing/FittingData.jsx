@@ -21,7 +21,7 @@ function FittingData() {
     useSelector((state) => state.plumbing);
 
   const [filtered, setFiltered] = useState([]);
-  const [buttonState, setButtonState] = useState([]);
+  const [buttonState, setButtonState] = useState(0);
 
   const filteredList = (fittingPriceList) => {
     const dupFilList = fittingPriceList.filter(
@@ -49,44 +49,40 @@ function FittingData() {
   const FITTING_COLUMNS = [
     {
       Header: "fittingID",
-      Footer: "FittingId",
+
       accessor: "plum_fitting_info.plum_fitting.id",
       show: false,
       filter: "equals",
     },
     {
       Header: "Id",
-      Footer: "Id",
       accessor: "plum_fitting_info.id",
+      show: false,
     },
     {
       Header: "Fitting",
-      Footer: "Fitting",
       accessor: "plum_fitting_info.plum_fitting.plum_fitting",
     },
     {
       Header: "Plumbing Grade",
-      Footer: "Plumbing Grade",
       accessor: "plum_fitting_info.plum_grade.plum_grade",
     },
     {
       Header: "Size",
-      Footer: "Size",
       accessor: "plum_fitting_info.plum_size.plum_size_metric",
     },
     {
       Header: "Type",
-      Footer: "Type",
       accessor: "plum_fitting_info.plum_fitting_type.plum_fitting_type",
+      show: false,
     },
     {
       Header: "Brand",
-      Footer: "Brand",
       accessor: "brand.brand",
+      show: false,
     },
     {
       Header: "Price",
-      Footer: "Price",
       accessor: "plum_fitting_price",
       Cell: ({ value }) => {
         let number = Number(value);
