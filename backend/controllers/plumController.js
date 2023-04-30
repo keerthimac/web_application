@@ -113,6 +113,12 @@ const getFittingPriceData = asyncHandler(async (req, res) => {
             plum_grade: {
               select: {
                 plum_grade: true,
+                plum_standard: {
+                  select: {
+                    plum_standard: true,
+                    plum_description: true,
+                  },
+                },
               },
             },
             plum_size: {

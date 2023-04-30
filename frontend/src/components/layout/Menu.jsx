@@ -26,7 +26,7 @@ function Menu() {
         <span>Sub Contract</span>
       </li>
       <li>
-        <a>Companies</a>
+        <Link to='/sub_contract/companies'>companies</Link>
       </li>
       <li>
         <a>Contracts</a>

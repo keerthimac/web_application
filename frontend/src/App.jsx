@@ -28,6 +28,8 @@ import PlumAddPrice from "./pages/materials/plumbing/PlumAddPrice";
 import PlumTypeChoose from "./pages/materials/plumbing/PlumTypeChoose";
 import PlumElementChoose from "./pages/materials/plumbing/PlumElementChoose";
 
+import SubCompanyAddInfo from "./pages/subcontract/SubCompanyAddInfo";
+
 // import "./App.css";
 
 function App() {
@@ -43,18 +45,13 @@ function App() {
                 <Route path='/' element={<Home />} />
                 <Route path='/about' element={<About />} />
 
+                {/* /Plumbing Route*/}
                 <Route path='/plumbing' element={<Plumbing />} />
                 <Route path='/plumbing/brands' element={<PlumBrands />} />
-                {/* <Route
-                    path='/plumbing/brands/:brandId'
-                    element={<PlumTypeChoose />}
-                  /> */}
                 <Route
                   path='/plumbing/brands/:brandId'
                   element={<PlumElementChoose />}
                 />
-
-                {/* /plumbing/brands/BrandName/ Routes */}
                 <Route
                   path='/plumbing/brands/:brandId/:plumType'
                   element={<PlumTypeChoose />}
@@ -81,6 +78,12 @@ function App() {
                     path='/plumbing/addFittingPrice'
                     element={<AddFittingData />}
                   /> */}
+
+                {/* /Sub Contract Route*/}
+                <Route
+                  path='/sub_contract/companies'
+                  element={<SubCompanyAddInfo />}
+                />
 
                 <Route path='/*' element={<NotFound />} />
                 <Route path='/notfound' element={<NotFound />} />
