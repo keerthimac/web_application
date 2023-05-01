@@ -29,6 +29,7 @@ import PlumTypeChoose from "./pages/materials/plumbing/PlumTypeChoose";
 import PlumElementChoose from "./pages/materials/plumbing/PlumElementChoose";
 
 import SubCompanyAddInfo from "./pages/subcontract/SubCompanyAddInfo";
+import SubContract from "./pages/subcontract/SubContract";
 
 // import "./App.css";
 
@@ -36,38 +37,38 @@ function App() {
   return (
     <>
       <Router>
-        <div className=' h-screen'>
+        <div className=" h-screen">
           <Navbar />
-          <div className=' flex flex-row h-screen'>
+          <div className=" flex flex-row h-screen">
             <Menu />
-            <main className='container mx-auto px-3 pb-12'>
+            <main className="container mx-auto px-3 pb-12">
               <Routes>
-                <Route path='/' element={<Home />} />
-                <Route path='/about' element={<About />} />
+                <Route path="/" element={<Home />} />
+                <Route path="/about" element={<About />} />
 
                 {/* /Plumbing Route*/}
-                <Route path='/plumbing' element={<Plumbing />} />
-                <Route path='/plumbing/brands' element={<PlumBrands />} />
+                <Route path="/plumbing" element={<Plumbing />} />
+                <Route path="/plumbing/brands" element={<PlumBrands />} />
                 <Route
-                  path='/plumbing/brands/:brandId'
+                  path="/plumbing/brands/:brandId"
                   element={<PlumElementChoose />}
                 />
                 <Route
-                  path='/plumbing/brands/:brandId/:plumType'
+                  path="/plumbing/brands/:brandId/:plumType"
                   element={<PlumTypeChoose />}
                 />
                 <Route
-                  path='/plumbing/brands/:brandId/fittingData/:plumFittingTypeId'
+                  path="/plumbing/brands/:brandId/fittingData/:plumFittingTypeId"
                   element={<FittingData />}
                 />
                 <Route
-                  path='/plumbing/brands/:brandId/fittingData/:plumFittingTypeId/addData'
+                  path="/plumbing/brands/:brandId/fittingData/:plumFittingTypeId/addData"
                   element={<AddFittingData />}
                 />
 
                 {/* /Historical Route*/}
                 <Route
-                  path='/plumbing/historical'
+                  path="/plumbing/historical"
                   element={<PlumHistorical />}
                 />
                 {/* <Route
@@ -81,19 +82,19 @@ function App() {
 
                 {/* /Sub Contract Route*/}
                 <Route
-                  path='/sub_contract/companies'
-                  element={<SubCompanyAddInfo />}
+                  path="/sub_contract/companies"
+                  element={<SubContract />}
                 />
 
-                <Route path='/*' element={<NotFound />} />
-                <Route path='/notfound' element={<NotFound />} />
+                <Route path="/*" element={<NotFound />} />
+                <Route path="/notfound" element={<NotFound />} />
               </Routes>
             </main>
           </div>
           {/* <Footer /> */}
         </div>
       </Router>
-      <ToastContainer position='top-center' autoClose={1000} theme='dark' />
+      <ToastContainer position="top-center" autoClose={1000} theme="dark" />
     </>
   );
 }
