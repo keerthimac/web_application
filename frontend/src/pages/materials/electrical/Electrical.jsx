@@ -2,13 +2,13 @@ import React from "react";
 import ColorCard from "../../../components/Shared/ColorCard";
 import BackButton from "../../../components/Shared/BackButton";
 
-function Plumbing() {
+const Electrical = () => {
   const content = [
     {
       id: 1,
       title: "Brands",
       body: "View Elements Brand offers and see current prices",
-      link: "plumbing/brands",
+      link: "electrical/brands",
     },
     {
       id: 2,
@@ -51,6 +51,6 @@ function Plumbing() {
       </div>
     </>
   );
-}
+};
 
-export default Plumbing;
+export default Electrical;

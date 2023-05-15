@@ -65,15 +65,6 @@ model stages_on_projects {
   @@id([project_id, project_stage_id])
 }
 
-//Plumbing Models
-
-model plum_fitting {
-  id                Int                 @id @default(autoincrement())
-  plum_fitting      String
-  image_url         String?
-  plum_fitting_info plum_fitting_info[]
-}
-
 model brand {
   id                 Int                   @id @default(autoincrement())
   brand              String
@@ -87,6 +78,14 @@ model material {
   id       Int                   @id @default(autoincrement())
   material String
   brands   brands_on_materials[]
+}
+
+//Plumbing Models
+model plum_fitting {
+  id                Int                 @id @default(autoincrement())
+  plum_fitting      String
+  image_url         String?
+  plum_fitting_info plum_fitting_info[]
 }
 
 model brands_on_materials {
@@ -198,4 +197,101 @@ model plum_pipe_price {
   plum_pipe_info_id     Int
   brand                 brand              @relation(fields: [brand_id], references: [id])
   brand_id              Int
+}
+
+//Electrical Models
+
+model wire_description {
+  id            Int     @id @default(autoincrement())
+  discription   String
+  size_imperial String?
+  size_metric   String
+  pack          String
+  image_url     String?
+}
+
+model socket_type {
+  id          Int     @id @default(autoincrement())
+  socket_type String
+  image_url   String?
+}
+
+model switch_type {
+  id          Int     @id @default(autoincrement())
+  switch_type String
+  image_url   String?
+}
+
+model breaker_type {
+  id          Int     @id @default(autoincrement())
+  switch_type String
+  image_url   String?
+}
+
+model ele_price_version {
+  id                Int    @id @default(autoincrement())
+  brand_id          Int
+  ele_price_version String
+}
+
+model ele_brand_model {
+  id       Int    @id @default(autoincrement())
+  brand_id Int
+  model    String
+}
+
+model ele_wire_spec {
+  id                  Int    @id @default(autoincrement())
+  brand_model_id      Int
+  wire_description_id Int
+  image_url           String
+}
+
+model ele_socket_spec {
+  id             Int    @id @default(autoincrement())
+  brand_model_id Int
+  socket_type_id Int
+  image_url      String
+}
+
+model ele_switch_spec {
+  id             Int    @id @default(autoincrement())
+  brand_model_id Int
+  switch_type_id Int
+  image_url      String
+}
+
+model ele_braker_spec {
+  id             Int    @id @default(autoincrement())
+  brand_model_id Int
+  braker_type_id Int
+  image_url      String
+}
+
+model ele_wire_prices {
+  id               Int   @id @default(autoincrement())
+  wire_spec_id     Int
+  price_version_id Int
+  retail_price     Float
+}
+
+model ele_socket_prices {
+  id               Int   @id @default(autoincrement())
+  socket_spec_id   Int
+  price_version_id Int
+  retail_price     Float
+}
+
+model ele_switch_prices {
+  id               Int   @id @default(autoincrement())
+  switch_spec_id   Int
+  price_version_id Int
+  retail_price     Float
+}
+
+model ele_braker_prices {
+  id               Int   @id @default(autoincrement())
+  braker_spec_id   Int
+  price_version_id Int
+  retail_price     Float
 }

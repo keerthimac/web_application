@@ -37,6 +37,7 @@ app.use("/images", express.static("Images"));
 //Routes
 app.use("/api/subContractors", require("./routes/subContractorRoute"));
 app.use("/api/plumbing", require("./routes/plumRoute"));
+app.use("/api/electrical", require("./routes/eleRoute"));
 
 app.post("/upload", upload.single("image"), (req, res) => {
   res.send(`/images/${path.basename(req.file.path)}`);

@@ -5,12 +5,12 @@ function ColorCard({ content }) {
   const { title, body, link } = content;
 
   return (
-    <div className='card w-50 bg-primary text-primary-content'>
-      <div className='card-body'>
-        <h2 className='card-title'>{title}</h2>
+    <div className="card w-50 bg-primary text-primary-content">
+      <div className="card-body">
+        <h2 className="card-title">{title}</h2>
         <p>{body}</p>
-        <div className='card-actions justify-end'>
-          <Link to={`/${link}`} className='btn rounded-btn'>
+        <div className="card-actions justify-end">
+          <Link to={`/${link}`} className="btn rounded-btn">
             Go!
           </Link>
           {/* <button className='btn'>Go!</button> */}

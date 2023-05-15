@@ -3,34 +3,19 @@ import { Link } from "react-router-dom";
 
 function Menu() {
   return (
-    <ul className='menu shadow-sm bg-neutral text-neutral-content w-40 p-5  h-full'>
-      <li className='menu-title'>
-        <span>Materials</span>
-      </li>
+    <ul className="menu shadow-sm bg-neutral text-neutral-content w-60 p-4  h-full">
+      <li className="menu-title">{/* <span>Materials</span> */}</li>
       <li>
-        <Link to='/plumbing'>Plumbing</Link>
+        <Link to="/materials">Materials</Link>
       </li>
+      <li className="menu-title">{/* <span>Sub Contract</span> */}</li>
       <li>
-        <a>Electrical</a>
+        <Link to="/sub_contract/companies">Sub-Contract</Link>
       </li>
-      <li>
-        <a>Tiles</a>
-      </li>
-      <li>
-        <a>Cement</a>
-      </li>
-      <li>
-        <a>Steel</a>
-      </li>
-      <li className='menu-title'>
-        <span>Sub Contract</span>
-      </li>
-      <li>
-        <Link to='/sub_contract/companies'>companies</Link>
-      </li>
-      <li>
+      <li className="menu-title">{/* <span>Sub Contract</span> */}</li>
+      {/* <li>
         <a>Contracts</a>
-      </li>
+      </li> */}
     </ul>
   );
 }

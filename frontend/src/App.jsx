@@ -15,6 +15,7 @@ import Menu from "./components/layout/Menu";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import NotFound from "./pages/NotFound";
+import MaterialMain from "./pages/materials/MaterialMain";
 
 import FittingData from "./pages/materials/plumbing/FittingData";
 import AddFittingData from "./pages/materials/plumbing/AddFittingData";
@@ -31,6 +32,15 @@ import PlumElementChoose from "./pages/materials/plumbing/PlumElementChoose";
 import SubCompanyAddInfo from "./pages/subcontract/SubCompanyAddInfo";
 import SubContract from "./pages/subcontract/SubContract";
 
+import Cement from "./pages/materials/cement/Cement";
+import Sand from "./pages/materials/sand/Sand";
+import Aggregate from "./pages/materials/aggregate/Aggregate";
+import Steel from "./pages/materials/steel/Steel";
+
+import Electrical from "./pages/materials/electrical/Electrical";
+import ElectricalBrands from "./pages/materials/electrical/ElectricalBrands";
+import AddElectricalBrands from "./pages/materials/electrical/AddElectricalBrands";
+
 // import "./App.css";
 
 function App() {
@@ -45,6 +55,27 @@ function App() {
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/materials" element={<MaterialMain />} />
+
+                {/* {Cement Route} */}
+                <Route path="/cement" element={<Cement />} />
+                {/* {Sand Route} */}
+                <Route path="/sand" element={<Sand />} />
+                {/* {Aggregate Route} */}
+                <Route path="/aggregate" element={<Aggregate />} />
+                {/* {Steel Route} */}
+                <Route path="/steel" element={<Steel />} />
+
+                {/* {Electrical Route} */}
+                <Route path="/electrical" element={<Electrical />} />
+                <Route
+                  path="/electrical/brands"
+                  element={<ElectricalBrands />}
+                />
+                <Route
+                  path="/electrical/brands/add_brand"
+                  element={<AddElectricalBrands />}
+                />
 
                 {/* /Plumbing Route*/}
                 <Route path="/plumbing" element={<Plumbing />} />
