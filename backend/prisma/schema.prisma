@@ -202,96 +202,129 @@ model plum_pipe_price {
 //Electrical Models
 
 model wire_description {
-  id            Int     @id @default(autoincrement())
+  id            Int             @id @default(autoincrement())
   discription   String
   size_imperial String?
   size_metric   String
   pack          String
   image_url     String?
+  ele_wire_spec ele_wire_spec[]
 }
 
 model socket_type {
-  id          Int     @id @default(autoincrement())
-  socket_type String
-  image_url   String?
+  id              Int               @id @default(autoincrement())
+  socket_type     String
+  image_url       String?
+  ele_socket_spec ele_socket_spec[]
 }
 
 model switch_type {
-  id          Int     @id @default(autoincrement())
-  switch_type String
-  image_url   String?
+  id              Int               @id @default(autoincrement())
+  switch_type     String
+  image_url       String?
+  ele_switch_spec ele_switch_spec[]
 }
 
 model breaker_type {
-  id          Int     @id @default(autoincrement())
-  switch_type String
-  image_url   String?
+  id              Int                @id @default(autoincrement())
+  switch_type     String
+  image_url       String?
+  ele_braker_spec ele_breaker_spec[]
 }
 
 model ele_price_version {
-  id                Int    @id @default(autoincrement())
-  brand_id          Int
-  ele_price_version String
+  id                 Int                  @id @default(autoincrement())
+  brand_id           Int
+  ele_price_version  String
+  ele_wire_prices    ele_wire_prices[]
+  ele_socket_prices  ele_socket_prices[]
+  ele_switch_prices  ele_switch_prices[]
+  ele_breaker_prices ele_breaker_prices[]
 }
 
 model ele_brand_model {
-  id       Int    @id @default(autoincrement())
-  brand_id Int
-  model    String
+  id               Int                @id @default(autoincrement())
+  brand_id         Int
+  model            String
+  ele_wire_spec    ele_wire_spec[]
+  ele_socket_spec  ele_socket_spec[]
+  ele_switch_spec  ele_switch_spec[]
+  ele_breaker_spec ele_breaker_spec[]
 }
 
 model ele_wire_spec {
-  id                  Int    @id @default(autoincrement())
+  id                  Int               @id @default(autoincrement())
   brand_model_id      Int
   wire_description_id Int
   image_url           String
+  wire_description    wire_description  @relation(fields: [wire_description_id], references: [id])
+  ele_brand_model     ele_brand_model   @relation(fields: [brand_model_id], references: [id])
+  ele_wire_prices     ele_wire_prices[]
 }
 
 model ele_socket_spec {
-  id             Int    @id @default(autoincrement())
-  brand_model_id Int
-  socket_type_id Int
-  image_url      String
+  id                Int                 @id @default(autoincrement())
+  brand_model_id    Int
+  socket_type_id    Int
+  image_url         String
+  socket_type       socket_type         @relation(fields: [socket_type_id], references: [id])
+  ele_brand_model   ele_brand_model?    @relation(fields: [brand_model_id], references: [id])
+  ele_socket_prices ele_socket_prices[]
 }
 
 model ele_switch_spec {
-  id             Int    @id @default(autoincrement())
-  brand_model_id Int
-  switch_type_id Int
-  image_url      String
+  id                Int                 @id @default(autoincrement())
+  brand_model_id    Int
+  switch_type_id    Int
+  image_url         String
+  switch_type       switch_type         @relation(fields: [switch_type_id], references: [id])
+  ele_brand_model   ele_brand_model     @relation(fields: [brand_model_id], references: [id])
+  ele_switch_prices ele_switch_prices[]
 }
 
-model ele_braker_spec {
-  id             Int    @id @default(autoincrement())
-  brand_model_id Int
-  braker_type_id Int
-  image_url      String
+model ele_breaker_spec {
+  id                 Int                  @id @default(autoincrement())
+  brand_model_id     Int
+  breaker_type_id    Int
+  image_url          String
+  breaker_type       breaker_type         @relation(fields: [breaker_type_id], references: [id])
+  ele_brand_model    ele_brand_model      @relation(fields: [brand_model_id], references: [id])
+  ele_breaker_prices ele_breaker_prices[]
 }
 
 model ele_wire_prices {
-  id               Int   @id @default(autoincrement())
-  wire_spec_id     Int
-  price_version_id Int
-  retail_price     Float
+  id                Int               @id @default(autoincrement())
+  wire_spec_id      Int
+  price_version_id  Int
+  retail_price      Float
+  ele_wire_spec     ele_wire_spec     @relation(fields: [wire_spec_id], references: [id])
+  ele_price_version ele_price_version @relation(fields: [price_version_id], references: [id])
 }
 
 model ele_socket_prices {
-  id               Int   @id @default(autoincrement())
-  socket_spec_id   Int
-  price_version_id Int
-  retail_price     Float
+  id                  Int               @id @default(autoincrement())
+  socket_spec_id      Int
+  price_version_id    Int
+  retail_price        Float
+  ele_socket_spec     ele_socket_spec   @relation(fields: [socket_spec_id], references: [id])
+  ele_price_version   ele_price_version @relation(fields: [price_version_id], references: [id])
+  ele_price_versionId Int?
 }
 
 model ele_switch_prices {
-  id               Int   @id @default(autoincrement())
-  switch_spec_id   Int
-  price_version_id Int
-  retail_price     Float
+  id                Int               @id @default(autoincrement())
+  switch_spec_id    Int
+  price_version_id  Int
+  retail_price      Float
+  ele_switch_spec   ele_switch_spec   @relation(fields: [switch_spec_id], references: [id])
+  ele_price_version ele_price_version @relation(fields: [price_version_id], references: [id])
 }
 
-model ele_braker_prices {
-  id               Int   @id @default(autoincrement())
-  braker_spec_id   Int
-  price_version_id Int
-  retail_price     Float
+model ele_breaker_prices {
+  id                Int               @id @default(autoincrement())
+  breaker_spec_id   Int
+  price_version_id  Int
+  retail_price      Float
+  ele_breaker_spec  ele_breaker_spec  @relation(fields: [breaker_spec_id], references: [id])
+  ele_price_version ele_price_version @relation(fields: [price_version_id], references: [id])
 }
