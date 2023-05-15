@@ -164,36 +164,57 @@ const prisma = new PrismaClient();
 //     process.exit(1);
 //   });
 
+// const main = async function () {
+//   const allBrands = await prisma.plum_fitting_info.findMany({
+//     where: {
+//       plum_fitting_type: {
+//         id: {
+//           equals: parseInt("1"),
+//         },
+//       },
+//     },
+//     select: {
+//       id: true,
+//       plum_fitting: {
+//         select: {
+//           plum_fitting: true,
+//         },
+//       },
+//       plum_grade: {
+//         select: {
+//           plum_grade: true,
+//         },
+//       },
+//       plum_size: {
+//         select: {
+//           plum_size_metric: true,
+//         },
+//       },
+//       plum_fitting_type: {
+//         select: {
+//           plum_fitting_type: true,
+//         },
+//       },
+//     },
+//   });
+//   console.log(allBrands);
+// };
+
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+//   });
+
 const main = async function () {
-  const allBrands = await prisma.plum_fitting_info.findMany({
+  const allBrands = await prisma.ele_wire_prices.findMany({
     where: {
-      plum_fitting_type: {
-        id: {
-          equals: parseInt("1"),
-        },
-      },
-    },
-    select: {
-      id: true,
-      plum_fitting: {
-        select: {
-          plum_fitting: true,
-        },
-      },
-      plum_grade: {
-        select: {
-          plum_grade: true,
-        },
-      },
-      plum_size: {
-        select: {
-          plum_size_metric: true,
-        },
-      },
-      plum_fitting_type: {
-        select: {
-          plum_fitting_type: true,
-        },
+      ele_price_version: {
+        id: 1,
       },
     },
   });
