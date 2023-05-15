@@ -1,0 +1,6 @@
+{
+  "cSpell.words": ["nawarathna"],
+  "[sql]": {
+    "editor.defaultFormatter": "adpyke.vscode-sql-formatter"
+  }
+}
