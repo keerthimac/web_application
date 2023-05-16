@@ -302,13 +302,12 @@ model ele_wire_prices {
 }
 
 model ele_socket_prices {
-  id                  Int               @id @default(autoincrement())
-  socket_spec_id      Int
-  price_version_id    Int
-  retail_price        Float
-  ele_socket_spec     ele_socket_spec   @relation(fields: [socket_spec_id], references: [id])
-  ele_price_version   ele_price_version @relation(fields: [price_version_id], references: [id])
-  ele_price_versionId Int?
+  id                Int               @id @default(autoincrement())
+  socket_spec_id    Int
+  price_version_id  Int
+  retail_price      Float
+  ele_socket_spec   ele_socket_spec   @relation(fields: [socket_spec_id], references: [id])
+  ele_price_version ele_price_version @relation(fields: [price_version_id], references: [id])
 }
 
 model ele_switch_prices {
