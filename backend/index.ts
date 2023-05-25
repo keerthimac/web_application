@@ -210,23 +210,23 @@ const prisma = new PrismaClient();
 //     process.exit(1);
 //   });
 
-const main = async function () {
-  const allBrands = await prisma.ele_wire_prices.findMany({
-    where: {
-      ele_price_version: {
-        id: 1,
-      },
-    },
-  });
-  console.log(allBrands);
-};
+// const main = async function () {
+//   const allBrands = await prisma.ele_wire_prices.findMany({
+//     where: {
+//       ele_price_version: {
+//         id: 1,
+//       },
+//     },
+//   });
+//   console.log(allBrands);
+// };
 
-main()
-  .then(async () => {
-    await prisma.$disconnect();
-  })
-  .catch(async (e) => {
-    console.error(e);
-    await prisma.$disconnect();
-    process.exit(1);
-  });
+// main()
+//   .then(async () => {
+//     await prisma.$disconnect();
+//   })
+//   .catch(async (e) => {
+//     console.error(e);
+//     await prisma.$disconnect();
+//     process.exit(1);
+//   });
